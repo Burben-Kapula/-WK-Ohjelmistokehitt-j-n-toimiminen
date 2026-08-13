@@ -1,0 +1,21 @@
+{
+  "env": {
+    "NVIDIA_API_KEY": "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"
+  },
+  "models": {
+    "providers": {
+      "nvidia": {
+        "baseUrl": "https://integrate.api.nvidia.com/v1",
+        "apiKey": "${NVIDIA_API_KEY}",
+        "api": "openai-completions"
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "nvidia/meta/llama-3.3-70b-instruct"
+      }
+    }
+  }
+}
