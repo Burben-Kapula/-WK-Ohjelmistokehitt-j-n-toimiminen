@@ -1,12 +1,823 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Frontend</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<html lang="fi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KAPULA — Betoniveistokset</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: #f7f8fa;
+      color: #111318;
+      font-family: Inter, Arial, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: 1440px;
+      min-height: 1650px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      background: #f7f8fa;
+    }
+
+    .absolute {
+      position: absolute;
+    }
+
+    /* HEADER */
+
+    .logo {
+      left: 3.9%;
+      top: 2.9%;
+      font-size: 21px;
+      font-weight: 700;
+    }
+
+    .logo-sub {
+      left: 3.9%;
+      top: 5.2%;
+      font-size: 9px;
+      color: #89909a;
+    }
+
+    .nav-home {
+      left: 54.9%;
+      top: 3.6%;
+      font-size: 13px;
+    }
+
+    .nav-sculptures {
+      left: 60.4%;
+      top: 3.6%;
+      font-size: 13px;
+      color: #777e88;
+    }
+
+    .nav-info {
+      left: 66.7%;
+      top: 3.6%;
+      font-size: 13px;
+      color: #777e88;
+    }
+
+    .nav-contact {
+      left: 71.9%;
+      top: 3.6%;
+      font-size: 13px;
+      color: #777e88;
+    }
+
+    .order-button {
+      left: 81.3%;
+      top: 2.7%;
+      width: 210px;
+      height: 44px;
+      border-radius: 22px;
+      background: #12151a;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* HERO */
+
+    .eyebrow {
+      left: 3.9%;
+      top: 11.9%;
+      font-size: 13px;
+      font-weight: 700;
+      color: #4267ff;
+    }
+
+    .hero-title-1 {
+      left: 3.9%;
+      top: 12.8%;
+      font-size: 66px;
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    .hero-title-2 {
+      left: 3.9%;
+      top: 17.8%;
+      font-size: 66px;
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    .hero-text-1 {
+      left: 3.9%;
+      top: 24.6%;
+      font-size: 16px;
+      color: #69717c;
+    }
+
+    .hero-text-2 {
+      left: 3.9%;
+      top: 26.4%;
+      font-size: 16px;
+      color: #69717c;
+    }
+
+    /* GALLERY */
+
+    .gallery {
+      left: 3.9%;
+      top: 31.1%;
+      width: 1328px;
+      height: 500px;
+      border-radius: 28px;
+      background: #e8ebf0;
+      position: absolute;
+    }
+
+    .gallery-title {
+      left: 2.6%;
+      top: 4.2%;
+      font-size: 10px;
+      font-weight: 700;
+      color: #89909a;
+    }
+
+    .gallery-counter {
+      right: 3.3%;
+      top: 4%;
+      font-size: 11px;
+      color: #89909a;
+    }
+
+    .main-image {
+      left: 2.4%;
+      top: 10%;
+      width: 850px;
+      height: 395px;
+      border-radius: 20px;
+      background: #d4d9e1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .main-image-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #9aa2ad;
+    }
+
+    .main-image-sub {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #a8afb8;
+    }
+
+    .gallery-card {
+      left: 64.8%;
+      width: 28.6%;
+      height: 115px;
+      border-radius: 18px;
+      background: white;
+    }
+
+    .card-1 {
+      top: 10%;
+    }
+
+    .card-2 {
+      top: 40%;
+    }
+
+    .card-image {
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      width: 90px;
+      height: 75px;
+      border-radius: 12px;
+      background: #e1e4e9;
+    }
+
+    .card-title {
+      position: absolute;
+      left: 105px;
+      top: 34px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .card-sub {
+      position: absolute;
+      left: 105px;
+      top: 57px;
+      font-size: 11px;
+      color: #89909a;
+    }
+
+    .card-arrow {
+      position: absolute;
+      right: 25px;
+      top: 42px;
+      color: #4267ff;
+      font-size: 20px;
+    }
+
+    .browse {
+      left: 64.8%;
+      top: 64.6%;
+      width: 28.6%;
+      height: 135px;
+      border-radius: 18px;
+      background: #12151a;
+      color: white;
+      padding: 20px;
+    }
+
+    .browse-title {
+      font-size: 10px;
+      color: #a8afb8;
+    }
+
+    .browse-text {
+      margin-top: 16px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .browse-arrow {
+      position: absolute;
+      right: 18px;
+      bottom: 15px;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #4267ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 21px;
+    }
+
+    /* ORDER */
+
+    .ordering-label {
+      left: 3.9%;
+      top: 70.6%;
+      font-size: 11px;
+      font-weight: 700;
+      color: #4267ff;
+    }
+
+    .ordering-title {
+      left: 3.9%;
+      top: 72.2%;
+      font-size: 29px;
+      font-weight: 700;
+    }
+
+    .ordering-text {
+      left: 3.9%;
+      top: 75.3%;
+      font-size: 14px;
+      color: #69717c;
+    }
+
+    .step {
+      position: absolute;
+      top: 70%;
+      width: 210px;
+      height: 120px;
+      border-radius: 20px;
+      background: white;
+      padding: 18px 20px;
+    }
+
+    .step-1 {
+      left: 48.6%;
+    }
+
+    .step-2 {
+      left: 64.6%;
+    }
+
+    .step-3 {
+      left: 80.6%;
+      width: 224px;
+      background: #4267ff;
+      color: white;
+    }
+
+    .step-number {
+      font-size: 12px;
+      font-weight: 700;
+      color: #4267ff;
+    }
+
+    .step-3 .step-number {
+      color: #dde5ff;
+    }
+
+    .step-title {
+      margin-top: 18px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .step-description {
+      margin-top: 6px;
+      font-size: 12px;
+      color: #7a818a;
+    }
+
+    .step-3 .step-description {
+      color: #dde5ff;
+    }
+
+    /* CTA */
+
+    .cta {
+      position: absolute;
+      left: 3.9%;
+      top: 82.1%;
+      width: 92.2%;
+      height: 120px;
+      border-radius: 24px;
+      background: #12151a;
+      color: white;
+    }
+
+    .cta-title {
+      position: absolute;
+      left: 2.6%;
+      top: 15%;
+      font-size: 27px;
+      font-weight: 700;
+    }
+
+    .cta-text {
+      position: absolute;
+      left: 2.6%;
+      top: 58%;
+      font-size: 13px;
+      color: #aeb4bc;
+    }
+
+    .cta-button {
+      position: absolute;
+      right: 2.6%;
+      top: 16%;
+      width: 200px;
+      height: 50px;
+      border-radius: 25px;
+      background: white;
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* SECOND PART */
+
+    .about-section {
+      position: absolute;
+      left: 3.9%;
+      top: 1010px;
+      width: 92.2%;
+    }
+
+    .about-eyebrow {
+      color: #4267ff;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .about-section h2 {
+      margin: 0;
+      font-size: 38px;
+    }
+
+    .about-description {
+      margin: 12px 0 0;
+      color: #69717c;
+      font-size: 14px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.75fr 1fr;
+      gap: 28px;
+      margin-top: 42px;
+    }
+
+    .process-box {
+      background: white;
+      border-radius: 22px;
+      padding: 28px;
+    }
+
+    .box-label {
+      font-size: 9px;
+      font-weight: 700;
+      color: #89909a;
+      margin-bottom: 28px;
+    }
+
+    .process-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 18px;
+      min-height: 82px;
+    }
+
+    .process-item:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      left: 25px;
+      top: 52px;
+      width: 1px;
+      height: 30px;
+      background: #dfe3e8;
+    }
+
+    .process-number {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #edf0f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .process-item.active .process-number {
+      background: #4267ff;
+      color: white;
+    }
+
+    .process-item h3 {
+      margin: 5px 0 7px;
+      font-size: 16px;
+    }
+
+    .process-item p {
+      margin: 0;
+      color: #89909a;
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .company-box {
+      background: #12151a;
+      border-radius: 22px;
+      padding: 28px;
+      color: white;
+    }
+
+    .company-box .box-label {
+      color: #89909a;
+    }
+
+    .company-box h3 {
+      margin: 0 0 7px;
+      font-size: 23px;
+    }
+
+    .company-box>p {
+      margin: 0;
+      color: #89909a;
+      font-size: 12px;
+    }
+
+    .company-line {
+      height: 1px;
+      background: #2c3036;
+      margin: 28px 0;
+    }
+
+    .company-label {
+      color: #89909a;
+      font-size: 8px;
+      margin-bottom: 7px;
+    }
+
+    .company-text {
+      font-size: 10px;
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+
+    .site-footer {
+      position: absolute;
+      left: 3.9%;
+      top: 1540px;
+      width: 92.2%;
+      border-top: 1px solid #dfe3e8;
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      color: #a0a7b1;
+      font-size: 9px;
+    }
+
+    .site-footer strong {
+      display: block;
+      color: #202329;
+      font-size: 10px;
+    }
+
+    .site-footer span {
+      display: block;
+      margin-top: 5px;
+      font-size: 7px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+
+    <div class="logo absolute">KAPULA</div>
+    <div class="logo-sub absolute">BETONIVEISTOKSET</div>
+
+    <a href="#top" class="nav-home absolute">Etusivu</a>
+    <a href="#veistokset" class="nav-sculptures absolute">Veistokset</a>
+    <a href="#tietoa" class="nav-info absolute">Tietoa</a>
+    <a href="#yhteys" class="nav-contact absolute">Yhteys</a>
+
+    <a href="#tilaa" class="order-button absolute">
+      TILAA VEISTOS →
+    </a>
+
+    <div id="top" class="eyebrow absolute">
+      BETONISTA · KÄSIN
+    </div>
+
+    <div class="hero-title-1 absolute">
+      Veistoksia, jotka
+    </div>
+
+    <div class="hero-title-2 absolute">
+      jäävät mieleen.
+    </div>
+
+    <div class="hero-text-1 absolute">
+      Täysikokoisia betoniveistoksia eläimistä.
+    </div>
+
+    <div class="hero-text-2 absolute">
+      Yksinkertainen tapa kysyä ja tehdä tilaus.
+    </div>
+
+    <section id="veistokset" class="gallery">
+
+      <div class="gallery-title absolute">
+        VEISTOSGALLERIA
+      </div>
+
+      <div class="gallery-counter absolute">
+        01 / 06
+      </div>
+
+      <div class="main-image absolute">
+        <div class="main-image-title">
+          KUVA TÄHÄN
+        </div>
+
+        <div class="main-image-sub">
+          Veistoksen pääkuva
+        </div>
+      </div>
+
+      <div class="gallery-card card-1 absolute">
+        <div class="card-image"></div>
+        <div class="card-title">Veistos 02</div>
+        <div class="card-sub">Seuraava työ</div>
+        <div class="card-arrow">→</div>
+      </div>
+
+      <div class="gallery-card card-2 absolute">
+        <div class="card-image"></div>
+        <div class="card-title">Veistos 03</div>
+        <div class="card-sub">Seuraava työ</div>
+        <div class="card-arrow">→</div>
+      </div>
+
+      <div class="browse absolute">
+        <div class="browse-title">GALLERIAN SELAUS</div>
+        <div class="browse-text">Vieritä lisää töitä</div>
+        <div class="browse-arrow">↓</div>
+      </div>
+
+    </section>
+
+    <div id="tilaa" class="ordering-label absolute">
+      TILAAMINEN
+    </div>
+
+    <div class="ordering-title absolute">
+      Tilaa helposti ilman verkkokauppaa.
+    </div>
+
+    <div class="ordering-text absolute">
+      Täytä lomake, kerro toiveesi ja jätä yhteystietosi.
+    </div>
+
+    <div class="step step-1">
+      <div class="step-number">01</div>
+      <div class="step-title">Valitse</div>
+      <div class="step-description">tuotteen tiedot</div>
+    </div>
+
+    <div class="step step-2">
+      <div class="step-number">02</div>
+      <div class="step-title">Lähetä</div>
+      <div class="step-description">tilauslomake</div>
+    </div>
+
+    <div class="step step-3">
+      <div class="step-number">03</div>
+      <div class="step-title">Sovitaan</div>
+      <div class="step-description">tilauksen yksityiskohdat</div>
+    </div>
+
+    <section class="cta">
+
+      <div class="cta-title">
+        Haluatko oman veistoksen?
+      </div>
+
+      <div class="cta-text">
+        Lähetä tilaus ja olemme yhteydessä.
+      </div>
+
+      <a href="#yhteys" class="cta-button">
+        TEE TILAUS →
+      </a>
+
+    </section>
+
+    <!-- ВТОРАЯ ЧАСТЬ САЙТА -->
+
+    <section id="tietoa" class="about-section">
+
+      <div class="about-eyebrow">
+        TIETOA
+      </div>
+
+      <h2>
+        Näin työskentelemme.
+      </h2>
+
+      <p class="about-description">
+        Yksinkertainen prosessi alusta valmiiseen veistokseen.
+      </p>
+
+      <div class="about-grid">
+
+        <div class="process-box">
+
+          <div class="box-label">
+            PROSESSI
+          </div>
+
+          <div class="process-item active">
+
+            <div class="process-number">
+              01
+            </div>
+
+            <div>
+              <h3>
+                Yhteydenotto
+              </h3>
+
+              <p>
+                Kerro millaista veistosta etsit ja jätä yhteystietosi.
+              </p>
+            </div>
+
+          </div>
+
+          <div class="process-item">
+
+            <div class="process-number">
+              02
+            </div>
+
+            <div>
+              <h3>
+                Suunnittelu
+              </h3>
+
+              <p>
+                Sovitaan yhdessä työn yksityiskohdista ja toiveista.
+              </p>
+            </div>
+
+          </div>
+
+          <div class="process-item">
+
+            <div class="process-number">
+              03
+            </div>
+
+            <div>
+              <h3>
+                Valmistus
+              </h3>
+
+              <p>
+                Veistos valmistetaan käsityönä betonista.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div id="yhteys" class="company-box">
+
+          <div class="box-label">
+            YRITYS
+          </div>
+
+          <h3>
+            Volodymyr Kapula
+          </h3>
+
+          <p>
+            Betoniveistokset
+          </p>
+
+          <div class="company-line"></div>
+
+          <div class="company-label">
+            OSOITE
+          </div>
+
+          <div class="company-text">
+            Huhtimäentie 307<br>
+            77570 Jäppilä, Pieksämäki
+          </div>
+
+          <div class="company-label">
+            YHTEYS
+          </div>
+
+          <div class="company-text">
+            045 344 4180<br>
+            volodimir.kapula@gmail.com
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <footer class="site-footer">
+
+      <div>
+        <strong>KAPULA</strong>
+        <span>BETONIVEISTOKSET</span>
+      </div>
+
+      <div>
+        Yhteydenotto · Tilauslomake
+      </div>
+
+    </footer>
+
+  </div>
+
+</body>
+
 </html>
