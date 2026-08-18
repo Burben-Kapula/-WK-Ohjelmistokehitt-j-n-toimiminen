@@ -1,19 +1,24 @@
+
 import "./App.css";
+import logo from "./assets/logo/logo.svg";
+
+
 
 function App() {
   return (
     <div className="page">
       <header className="header">
-        <div className="logo">
-          <div className="logo-title">KAPULA</div>
-          <div className="logo-sub">BETONIVEISTOKSET</div>
-        </div>
+        <img
+          src={logo}
+          alt="K.BETONIVEISTOKSET"
+          className="logo"
+        />
 
         <nav className="nav">
-          <a href="#" className="nav-link active">Etusivu</a>
-          <a href="#" className="nav-link">Veistokset</a>
+          
+          
           <a href="#" className="nav-link">Tietoa</a>
-          <a href="#" className="nav-link">Yhteys</a>
+          
         </nav>
 
         <button className="cta-button">TILAA VEISTOS →</button>
@@ -143,7 +148,7 @@ function App() {
 
         <div className="footer-bottom">
           <div className="footer-logo">
-            <div className="logo-title">KAPULA</div>
+            
             <div className="logo-sub">BETONIVEISTOKSET</div>
           </div>
           <div className="footer-links">

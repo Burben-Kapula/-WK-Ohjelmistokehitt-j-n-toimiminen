@@ -1,3 +1,6 @@
+
+
+
 /* Базовые сбросы и шрифт */
 *,
 *::before,
@@ -16,7 +19,7 @@ body {
 a {
     color: inherit;
     text-decoration: inherit;
-}
+}бля
 
 button {
     border: none;
@@ -35,7 +38,8 @@ button {
     background: #fff;
 }
 
-/* Header */
+/* HEADER */
+
 .header {
     position: relative;
     height: 140px;
@@ -47,21 +51,19 @@ button {
     padding: 0 56px;
 }
 
+/* ЛОГОТИП ИЗ FIGMA */
+
 .logo {
-    display: flex;
-    flex-direction: column;
+    width: 280px;
+    height: auto;
+    display: block;
+    flex-shrink: 0;
 }
 
-.logo-title {
-    font-size: 21px;
-    font-weight: 700;
-    color: #000;
-}
-
-.logo-sub {
-    font-size: 9px;
-    color: #89909a;
-    margin-top: 4px;
+.logo img {
+    width: 180px;
+    height: auto;
+    display: block;
 }
 
 .nav {
