@@ -89,6 +89,29 @@ button {
     border-radius: 22px;
 }
 
+.back-to-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 1000;
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background: #12151a;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.back-to-top:hover {
+    background: #4267ff;
+}
+
 /* Main */
 .main {
     position: relative;

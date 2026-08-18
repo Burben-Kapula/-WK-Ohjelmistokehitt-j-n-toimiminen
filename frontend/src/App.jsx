@@ -1,10 +1,42 @@
 
 import "./App.css";
-import logo from "./assets/logo/logo.svg";
+import logo from "./assets/logo/Logo.svg";
+import { useRef } from "react";
+import { useEffect, useState } from "react";
 
 
 
 function App() {
+    const targetRef = useRef(null);
+    const [isVisible, setIsVisible] = useState(false);
+
+    const scrollToElement = () => {
+    targetRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+ useEffect(() => {
+    const handleScroll = () => {
+      // Кнопка з'являється після 300px прокрутки
+      setIsVisible(window.scrollY > 300);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Важливо видалити listener після демонтування компонента
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <div className="page">
       <header className="header">
@@ -13,12 +45,15 @@ function App() {
           alt="K.BETONIVEISTOKSET"
           className="logo"
         />
-
+      {isVisible && (
+        <button className="back-to-top" onClick={scrollToTop}>
+          ↑
+        </button>
+      )}
         <nav className="nav">
-          
-          
-          <a href="#" className="nav-link">Tietoa</a>
-          
+          <button className="nav-link" onClick={scrollToElement}>
+            Tietoa
+          </button>
         </nav>
 
         <button className="cta-button">TILAA VEISTOS →</button>
@@ -101,30 +136,14 @@ function App() {
       <footer className="footer">
         <div className="footer-top">
           <div className="process-block">
+            <section ref={targetRef}>
             <div className="footer-label">TIETOA</div>
+            </section>
             <h3 className="footer-title">Näin työskentelemme.</h3>
             <p className="footer-desc">
               Yksinkertainen prosessi alusta valmiiseen veistokseen.
             </p>
 
-            <div className="process-steps">
-              <ProcessStep
-                number="01"
-                title="Yhteydenotto"
-                desc="Kerro millaista veistosta etsit ja jätä yhteystietosi."
-                active
-              />
-              <ProcessStep
-                number="02"
-                title="Suunnittelu"
-                desc="Sovitaan yhdessä työn yksityiskohdista ja toiveista."
-              />
-              <ProcessStep
-                number="03"
-                title="Valmistus"
-                desc="Veistos valmistetaan käsityönä betonista."
-              />
-            </div>
           </div>
 
           <div className="company-block">
