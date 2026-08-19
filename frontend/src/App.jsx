@@ -1,6 +1,3 @@
-
-
-
 import "./styles/fonts.css";
 import "./App.css";
 
@@ -47,39 +44,54 @@ function App() {
         />
 
         {isVisible && (
-          <button className="back-to-top" onClick={scrollToTop}>
+          <button
+            className="back-to-top"
+            onClick={scrollToTop}
+          >
             ↑
           </button>
         )}
 
         <nav className="nav">
-          <button className="nav-link" onClick={scrollToElement}>
+          <button
+            className="nav-link"
+            onClick={scrollToElement}
+          >
             Tietoa
           </button>
         </nav>
 
-        <button className="cta-button">TILAA VEISTOS →</button>
+        <button className="cta-button">
+          TILAA VEISTOS →
+        </button>
       </header>
 
       <main className="main">
+        {/* =========================
+            HERO
+            ========================= */}
+
         <section className="hero">
-          <div className="hero-label">BETONISTA · KÄSIN</div>
+          <div className="hero-label">
+            BETONISTA · KÄSIN
+          </div>
 
           <h1 className="hero-title">
-            Veistoksia, jotka
-            <br />
-            jäävät mieleen.
+            BETONISTA · KÄSIN
           </h1>
 
           <p className="hero-desc">
-            Täysikokoisia betoniveistoksia eläimistä.
+            Eläinveistoksia käsin tehtynä.
             <br />
-            Yksinkertainen tapa kysyä ja tehdä tilaus.
+            Helppo tapa tilata oma veistos.
           </p>
 
           <div className="gallery-placeholder">
             <div className="gallery-main-image">
-              <div className="image-caption">KUVA TÄHÄN</div>
+              <div className="image-caption">
+                KUVA TÄHÄN
+              </div>
+
               <div className="image-subcaption">
                 Veistoksen pääkuva
               </div>
@@ -115,15 +127,22 @@ function App() {
           </div>
         </section>
 
+        {/* =========================
+            ORDER STEPS
+            ========================= */}
+
         <section className="order-steps">
-          <h2 className="section-label">TILAAMINEN</h2>
+          <h2 className="section-label">
+            TILAAMINEN
+          </h2>
 
           <h3 className="section-title">
             Tilaa helposti ilman verkkokauppaa.
           </h3>
 
           <p className="section-desc">
-            Täytä lomake, kerro toiveesi ja jätä yhteystietosi.
+            Täytä lomake, kerro toiveesi ja jätä
+            yhteystietosi.
           </p>
 
           <div className="steps">
@@ -150,6 +169,10 @@ function App() {
           </div>
         </section>
 
+        {/* =========================
+            CTA
+            ========================= */}
+
         <section className="cta-banner">
           <div className="cta-banner-text">
             <h3 className="cta-banner-title">
@@ -167,11 +190,17 @@ function App() {
         </section>
       </main>
 
+      {/* =========================
+          FOOTER
+          ========================= */}
+
       <footer className="footer">
         <div className="footer-top">
           <div className="process-block">
             <section ref={targetRef}>
-              <div className="footer-label">TIETOA</div>
+              <div className="footer-label">
+                TIETOA
+              </div>
             </section>
 
             <h3 className="footer-title">
@@ -179,7 +208,8 @@ function App() {
             </h3>
 
             <p className="footer-desc">
-              Yksinkertainen prosessi alusta valmiiseen veistokseen.
+              Yksinkertainen prosessi alusta valmiiseen
+              veistokseen.
             </p>
           </div>
 
@@ -199,7 +229,9 @@ function App() {
             <div className="company-divider" />
 
             <div className="company-info">
-              <div className="info-label">OSOITE</div>
+              <div className="info-label">
+                OSOITE
+              </div>
 
               <div className="info-text">
                 Huhtimäentie 307
@@ -209,7 +241,9 @@ function App() {
                 77570 Jäppilä, Pieksämäki
               </div>
 
-              <div className="info-label">YHTEYS</div>
+              <div className="info-label">
+                YHTEYS
+              </div>
 
               <div className="info-text">
                 045 344 4180
@@ -238,6 +272,10 @@ function App() {
   );
 }
 
+/* =========================
+   GALLERY ITEM
+   ========================= */
+
 function GalleryItem({ number, label, sub }) {
   return (
     <div className="gallery-item">
@@ -260,7 +298,16 @@ function GalleryItem({ number, label, sub }) {
   );
 }
 
-function StepCard({ number, title, desc, variant }) {
+/* =========================
+   STEP CARD
+   ========================= */
+
+function StepCard({
+  number,
+  title,
+  desc,
+  variant,
+}) {
   const isDark = variant === "dark";
 
   return (
@@ -288,7 +335,16 @@ function StepCard({ number, title, desc, variant }) {
   );
 }
 
-function ProcessStep({ number, title, desc, active }) {
+/* =========================
+   PROCESS STEP
+   ========================= */
+
+function ProcessStep({
+  number,
+  title,
+  desc,
+  active,
+}) {
   return (
     <div className="process-step">
       <div
