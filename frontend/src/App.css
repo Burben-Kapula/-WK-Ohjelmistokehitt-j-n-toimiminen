@@ -67,11 +67,15 @@ button {
    ========================= */
 
 .header {
+    position: relative;
+
     height: 140px;
     padding: 0 56px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     background: #f7f8fa;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
@@ -87,20 +91,58 @@ button {
     height: auto;
 }
 
+/* Tietoa — строго по центру шапки */
+
 .nav {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
     display: flex;
-    gap: 24px;
+    align-items: center;
+    justify-content: center;
 }
 
 .nav-link {
-    font-size: 14px;
-    color: #777e88;
+    min-width: 140px;
+    min-height: 56px;
+
+    padding: 16px 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 30px;
+
+    font-family: var(--font-main);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+
+    color: #12151a;
+    background: #e9ecf1;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease;
 }
 
-.nav-link.active {
-    color: #000000;
+.nav-link:hover {
+    background: #dde2e9;
 }
 
+.nav-link:active {
+    transform: scale(0.96);
+}
+
+.nav-link:focus-visible {
+    outline: 3px solid #4267ff;
+    outline-offset: 3px;
+}
 
 /* =========================
    BUTTONS

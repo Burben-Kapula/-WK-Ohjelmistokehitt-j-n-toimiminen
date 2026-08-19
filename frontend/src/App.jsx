@@ -73,11 +73,11 @@ function App() {
 
         <section className="hero">
           <div className="hero-label">
-            BETONISTA · KÄSIN
+            VEISTOKSIA KOTIIN.
           </div>
 
           <h1 className="hero-title">
-            BETONISTA · KÄSIN
+            VEISTOKSIA KOTIIN.
           </h1>
 
           <p className="hero-desc">
