@@ -1,698 +1,696 @@
-/* =========================
-   RESET / BASE
-   ========================= */
-
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html,
-body,
-#root {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 100%;
-}
-
-body {
-    font-size: 15px;
-    line-height: 1.45;
-    color: #12151a;
-    background: #ffffff;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-button,
-input,
-textarea,
-select,
-option {
-    font: inherit;
-    color: inherit;
-}
-
-button {
-    border: 0;
-    background: transparent;
-    cursor: pointer;
-}
-
-
-/* =========================
-   PAGE
-   ========================= */
-
-.page {
-    width: 1440px;
-    min-width: 1440px;
-    max-width: 1440px;
-    margin: 0 auto;
-    background: #ffffff;
-}
-
-
-/* =========================
-   HEADER
-   ========================= */
-
-.header {
-    position: relative;
-
-    height: 100px;
-    padding: 0 56px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    background: #f7f8fa;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.logo {
-    width: 280px;
-    flex-shrink: 0;
-}
-
-.logo img {
-    display: block;
-    width: 180px;
-    height: auto;
-}
-
-/* Tietoa — строго по центру шапки */
-
-/* TIETOA */
-.nav-link {
-    height: 44px;
-    min-width: auto;
-    padding: 0 20px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    border: 1px solid #dfe3ea;
-    border-radius: 999px;
-    background: #ffffff;
-    color: #12151a;
-    font-size: 13px;
-    font-weight: 700;
-    box-shadow: 0 2px 0 rgba(18, 21, 26, 0.04);
-    transition: 0.2s ease;
-}
-
-.nav-link::before {
-    content: "i";
-    width: 18px;
-    height: 18px;
-    display: grid;
-    place-items: center;
-    border: 1.5px solid #4267ff;
-    border-radius: 50%;
-    color: #4267ff;
-    font-size: 11px;
-    font-weight: 800;
-}
-
-.nav-link:hover {
-    background: #f1f4ff;
-    border-color: #bfcaff;
-    transform: translateY(-2px);
-}
-
-
-.cta-button {
-    height: 44px;
-    min-width: auto;
-    padding: 0 10px 0 20px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-
-    border: 1px solid #dfe3ea;
-    border-radius: 999px;
-
-    background: #ffffff;
-    color: #12151a;
-
-    font-size: 13px;
-    font-weight: 700;
-
-    box-shadow: 0 2px 0 rgba(18, 21, 26, 0.04);
-    transition: 0.2s ease;
-}
-
-/* TILAA VEISTOS — белая кнопка */
-.cta-button {
-    height: 44px;
-    padding: 0 10px 0 20px;
-    display: inline-flex;
-    align-items: center;
-    gap: 14px;
-
-    border: 1px solid #dfe3ea;
-    border-radius: 999px;
-
-    background: #ffffff !important;
-    color: #12151a !important;
-
-    font-size: 13px;
-    font-weight: 700;
-    box-shadow: none;
-}
-
-.cta-button::after {
-    content: "→";
-    width: 30px;
-    height: 30px;
-    display: grid;
-    place-items: center;
-
-    border: 1px solid #dfe3ea;
-    border-radius: 50%;
-    background: #ffffff;
-    color: #4267ff;
-}
-
-.cta-button:hover {
-    background: #ffffff !important;
-    color: #12151a !important;
-}
-
-/* =========================
-   BUTTONS
-   ========================= */
-
-.cta-button,
-.cta-banner-button {
-    min-height: 52px;
-    padding: 16px 28px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 1;
-    border-radius: 28px;
-}
-
-.cta-button {
-    background: #12151a;
-    color: #ffffff;
-}
-
-.cta-button:hover {
-    background: #4267ff;
-}
-
-
-/* =========================
-   BACK TO TOP
-   ========================= */
-
-.back-to-top {
-    position: fixed;
-    right: 24px;
-    bottom: 24px;
-    z-index: 1000;
-    width: 52px;
-    height: 52px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: #12151a;
-    color: #ffffff;
-    font-size: 22px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.back-to-top:hover {
-    background: #4267ff;
-}
-
-
-/* =========================
-   HERO
-   ========================= */
-
-.hero {
-    padding: 56px 0px 0;
-}
-
-.hero-label,
-.section-label,
-.footer-label {
-    font-size: 13px;
-    font-weight: 700;
-    color: #4267ff;
-}
-
-.hero-label {
-    margin-bottom: 10px;
-}
-
-.hero-title {
-    margin: 0;
-    max-width: 1050px;
-
-    font-size: 60px;
-    line-height: 0.96;
-    font-weight: 700;
-    letter-spacing: -3.5px;
-
-    color: #12151a;
-}
-
-.hero-desc {
-    max-width: 680px;
-    margin-top: 18px;
-    font-size: 16px;
-    color: #69717c;
-}
-
-
-/* =========================
-   GALLERY
-   ========================= */
-
-.gallery-placeholder {
-    min-height: 500px;
-    margin-top: 40px;
-    padding: 28px;
-    background: #e8ebf0;
-    border-radius: 28px;
-}
-
-.gallery-main-image {
-    height: 395px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: #d4d9e1;
-    border-radius: 20px;
-    color: #9aa2ad;
-    font-size: 28px;
-    font-weight: 700;
-}
-
-.image-subcaption {
-    margin-top: 8px;
-    font-size: 12px;
-    color: #a8afb8;
-}
-
-.gallery-list {
-    margin-top: 28px;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 380px;
-    gap: 20px;
-}
-
-.gallery-item {
-    min-height: 104px;
-    padding: 16px 22px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    background: #ffffff;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.gallery-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(18, 21, 26, 0.08);
-}
-
-.gallery-item-image {
-    width: 76px;
-    height: 64px;
-    flex-shrink: 0;
-    background: #e1e4e9;
-    border-radius: 11px;
-}
-
-.gallery-item-content {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-}
-
-.gallery-item-title {
-    font-size: 16px;
-    font-weight: 700;
-    white-space: nowrap;
-}
-
-.gallery-item-sub {
-    font-size: 13px;
-    color: #89909a;
-    white-space: nowrap;
-}
-
-.gallery-item-arrow {
-    width: 42px;
-    height: 42px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    color: #4267ff;
-    font-size: 22px;
-    transition: transform 0.2s ease;
-}
-
-.gallery-item:hover .gallery-item-arrow {
-    transform: translateX(5px);
-}
-
-
-/* =========================
-   GALLERY HINT
-   ========================= */
-
-.gallery-scroll-hint {
-    min-height: 76px;
-    padding: 14px 18px 14px 22px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #12151a;
-    border-radius: 18px;
-    color: #ffffff;
-    cursor: pointer;
-}
-
-.gallery-scroll-title {
-    font-size: 12px;
-    color: #a8afb8;
-}
-
-.gallery-scroll-text {
-    font-size: 16px;
-    font-weight: 700;
-}
-
-.gallery-scroll-icon {
-    width: 50px;
-    height: 50px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: #4267ff;
-    color: #ffffff;
-    font-size: 22px;
-}
-
-
-/* =========================
-   ORDER STEPS
-   ========================= */
-
-.order-steps {
-    padding: 80px 56px 0;
-}
-
-.section-title {
-    margin-top: 8px;
-    font-size: 30px;
-    line-height: 1.2;
-    font-weight: 700;
-}
-
-.section-desc {
-    max-width: 680px;
-    margin-top: 8px;
-    font-size: 15px;
-    color: #69717c;
-}
-
-.steps {
-    margin-top: 40px;
-    display: grid;
-    grid-template-columns: repeat(3, 210px);
-    gap: 20px;
-}
-
-.step-card {
-    min-height: 120px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border-radius: 20px;
-}
-
-.step-card.light {
-    background: #ffffff;
-    border: 1px solid #e8ebf0;
-}
-
-.step-card.dark {
-    background: #4267ff;
-    color: #ffffff;
-}
-
-.step-number {
-    margin-bottom: 8px;
-    font-size: 13px;
-    font-weight: 700;
-}
-
-.step-number.dark {
-    color: #4267ff;
-}
-
-.step-number.light {
-    color: #dde5ff;
-}
-
-.step-title {
-    font-size: 16px;
-    font-weight: 700;
-}
-
-.step-desc {
-    margin-top: 4px;
-    font-size: 13px;
-    color: #7a818a;
-}
-
-.step-card.dark .step-desc {
-    color: #dde5ff;
-}
-
-
-/* =========================
-   CTA
-   ========================= */
-
-.cta-banner {
-    margin: 80px 56px 0;
-    padding: 24px 28px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #12151a;
-    border-radius: 24px;
-}
-
-.cta-banner-title {
-    font-size: 28px;
-    line-height: 1.2;
-    font-weight: 700;
-    color: #ffffff;
-}
-
-.cta-banner-desc {
-    margin-top: 8px;
-    font-size: 14px;
-    color: #aeb4bc;
-}
-
-.cta-banner-button {
-    background: #ffffff;
-    color: #000000;
-}
-
-.cta-banner-button:hover {
-    background: #4267ff;
-    color: #ffffff;
-}
-
-
-/* =========================
-   FOOTER
-   ========================= */
-
-.footer {
-    min-height: 850px;
-    margin-top: 80px;
-    padding: 56px;
-    background: #f7f8fa;
-}
-
-.footer-top {
-    display: grid;
-    grid-template-columns: minmax(0, 850px) minmax(0, 444px);
-    gap: 40px;
-}
-
-.footer-title {
-    margin-top: 8px;
-    font-size: 38px;
-    line-height: 1.15;
-    font-weight: 700;
-}
-
-.footer-desc {
-    margin-top: 8px;
-    font-size: 15px;
-    color: #69717c;
-}
-
-
-/* =========================
-   PROCESS
-   ========================= */
-
-.process-steps {
-    min-height: 390px;
-    margin-top: 40px;
-    padding: 26px;
-    background: #ffffff;
-    border-radius: 26px;
-}
-
-.process-step {
-    position: relative;
-    display: flex;
-    gap: 18px;
-    padding-bottom: 30px;
-    align-items: flex-start;
-}
-
-.process-step-circle {
-    width: 56px;
-    height: 56px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: #eef1f5;
-    color: #12151a;
-    font-size: 14px;
-    font-weight: 700;
-}
-
-.process-step-circle.active {
-    background: #4267ff;
-    color: #ffffff;
-}
-
-.process-step-title {
-    font-size: 19px;
-    font-weight: 700;
-}
-
-.process-step-desc {
-    max-width: 520px;
-    margin-top: 6px;
-    font-size: 14px;
-    color: #69717c;
-}
-
-.process-step-line {
-    position: absolute;
-    left: 28px;
-    top: 56px;
-    width: 1px;
-    height: 35px;
-    background: #dde1e6;
-}
-
-
-/* =========================
-   COMPANY
-   ========================= */
-
-.company-block {
-    padding: 26px;
-    background: #12151a;
-    border-radius: 26px;
-    color: #ffffff;
-}
-
-.footer-label-light,
-.info-label {
-    font-size: 11px;
-    color: #7f8791;
-}
-
-.footer-label-light {
-    font-weight: 700;
-    color: #aeb4bc;
-}
-
-.company-name {
-    margin-top: 8px;
-    font-size: 28px;
-    font-weight: 700;
-}
-
-.company-sub {
-    margin-top: 4px;
-    font-size: 14px;
-    color: #aeb4bc;
-}
-
-.company-divider {
-    height: 1px;
-    margin: 20px 0;
-    background: #30343a;
-}
-
-.info-label {
-    margin-top: 16px;
-}
-
-.info-text {
-    margin-top: 4px;
-    font-size: 14px;
-    color: #ffffff;
-}
-
-
-/* =========================
-   FOOTER BOTTOM
-   ========================= */
-
-
-
-.footer-links {
-    font-size: 12px;
-    color: #89909a;
+/* ========================= 
+   RESET / BASE 
+   ========================= */ 
+ 
+*, 
+*::before, 
+*::after { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+} 
+ 
+html, 
+body, 
+#root { 
+    margin: 0; 
+    padding: 0; 
+    width: 100%; 
+    min-height: 100%; 
+} 
+ 
+body { 
+    font-size: 15px; 
+    line-height: 1.45; 
+    color: #12151a; 
+    background: #ffffff; 
+    -webkit-font-smoothing: antialiased; 
+    -moz-osx-font-smoothing: grayscale; 
+} 
+ 
+a { 
+    color: inherit; 
+    text-decoration: none; 
+} 
+ 
+button, 
+input, 
+textarea, 
+select, 
+option { 
+    font: inherit; 
+    color: inherit; 
+} 
+ 
+button { 
+    border: 0; 
+    background: transparent; 
+    cursor: pointer; 
+} 
+ 
+ 
+/* ========================= 
+   PAGE 
+   ========================= */ 
+ 
+.page { 
+    width: 1440px; 
+    min-width: 1440px; 
+    max-width: 1440px; 
+    margin: 0 auto; 
+    background: #ffffff; 
+} 
+ 
+ 
+/* ========================= 
+   HEADER 
+   ========================= */ 
+ 
+.header { 
+    position: relative; 
+ 
+    height: 100px; 
+    padding: 0 56px; 
+ 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+ 
+    background: #f7f8fa; 
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); 
+} 
+ 
+.logo { 
+    width: 280px; 
+    flex-shrink: 0; 
+} 
+ 
+.logo img { 
+    display: block; 
+    width: 180px; 
+    height: auto; 
+} 
+ 
+/* Tietoa — строго по центру шапки */ 
+ 
+/* TIETOA */ 
+.nav-link { 
+    height: 44px; 
+    min-width: auto; 
+    padding: 0 20px; 
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 8px; 
+    border: 1px solid #dfe3ea; 
+    border-radius: 999px; 
+    background: #ffffff; 
+    color: #12151a; 
+    font-size: 13px; 
+    font-weight: 700; 
+    box-shadow: 0 2px 0 rgba(18, 21, 26, 0.04); 
+    transition: 0.2s ease; 
+} 
+ 
+.nav-link::before { 
+    content: "i"; 
+    width: 18px; 
+    height: 18px; 
+    display: grid; 
+    place-items: center; 
+    border: 1.5px solid #4267ff; 
+    border-radius: 50%; 
+    color: #4267ff; 
+    font-size: 11px; 
+    font-weight: 800; 
+} 
+ 
+.nav-link:hover { 
+    background: #f1f4ff; 
+    border-color: #bfcaff; 
+    transform: translateY(-2px); 
+} 
+ 
+ 
+.cta-button { 
+    height: 44px; 
+    min-width: auto; 
+    padding: 0 10px 0 20px; 
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 14px; 
+ 
+    border: 1px solid #dfe3ea; 
+    border-radius: 999px; 
+ 
+    background: #ffffff; 
+    color: #12151a; 
+ 
+    font-size: 13px; 
+    font-weight: 700; 
+ 
+    box-shadow: 0 2px 0 rgba(18, 21, 26, 0.04); 
+    transition: 0.2s ease; 
+} 
+ 
+/* TILAA VEISTOS — белая кнопка */ 
+.cta-button { 
+    height: 44px; 
+    padding: 0 10px 0 20px; 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 14px; 
+ 
+    border: 1px solid #dfe3ea; 
+    border-radius: 999px; 
+ 
+    background: #ffffff !important; 
+    color: #12151a !important; 
+ 
+    font-size: 13px; 
+    font-weight: 700; 
+    box-shadow: none; 
+} 
+ 
+.cta-button::after { 
+    content: "→"; 
+    width: 30px; 
+    height: 30px; 
+    display: grid; 
+    place-items: center; 
+ 
+    border: 1px solid #dfe3ea; 
+    border-radius: 50%; 
+    background: #ffffff; 
+    color: #4267ff; 
+} 
+ 
+.cta-button:hover { 
+    background: #ffffff !important; 
+    color: #12151a !important; 
+} 
+ 
+/* ========================= 
+   BUTTONS 
+   ========================= */ 
+ 
+.cta-button, 
+.cta-banner-button { 
+    min-height: 52px; 
+    padding: 16px 28px; 
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center; 
+    white-space: nowrap; 
+    font-size: 14px; 
+    font-weight: 700; 
+    line-height: 1; 
+    border-radius: 999px; 
+} 
+ 
+.cta-button { 
+    background: #12151a; 
+    color: #ffffff; 
+} 
+ 
+.cta-button:hover { 
+    background: #4267ff; 
+} 
+ 
+ 
+/* ========================= 
+   BACK TO TOP 
+   ========================= */ 
+ 
+.back-to-top { 
+    position: fixed; 
+    right: 24px; 
+    bottom: 24px; 
+    z-index: 1000; 
+    width: 52px; 
+    height: 52px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border-radius: 50%; 
+    background: #12151a; 
+    color: #ffffff; 
+    font-size: 22px; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
+} 
+ 
+.back-to-top:hover { 
+    background: #4267ff; 
+} 
+ 
+ 
+/* ========================= 
+   HERO 
+   ========================= */ 
+ 
+.hero { 
+    padding: 56px 0px 0; 
+} 
+ 
+.hero-label, 
+.section-label, 
+.footer-label { 
+    font-size: 13px; 
+    font-weight: 700; 
+    color: #4267ff; 
+} 
+ 
+.hero-label { 
+    margin-bottom: 10px; 
+} 
+ 
+.hero-title { 
+    margin: 0; 
+    max-width: 1050px; 
+ 
+    font-size: 60px; 
+    line-height: 0.96; 
+    font-weight: 700; 
+    letter-spacing: -3.5px; 
+ 
+    color: #12151a; 
+} 
+ 
+.hero-desc { 
+    max-width: 680px; 
+    margin-top: 18px; 
+    font-size: 16px; 
+    color: #69717c; 
+} 
+ 
+ 
+/* ========================= 
+   GALLERY 
+   ========================= */ 
+ 
+.gallery-placeholder { 
+    min-height: 500px; 
+    margin-top: 40px; 
+    padding: 28px; 
+    background: #e8ebf0; 
+    border-radius: 18px; 
+} 
+ 
+.gallery-main-image { 
+    height: 395px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    background: #d4d9e1; 
+    border-radius: 14px; 
+    color: #9aa2ad; 
+    font-size: 28px; 
+    font-weight: 700; 
+} 
+ 
+.image-subcaption { 
+    margin-top: 8px; 
+    font-size: 12px; 
+    color: #a8afb8; 
+} 
+ 
+.gallery-list { 
+    margin-top: 28px; 
+    display: grid; 
+    grid-template-columns: minmax(0, 1fr) 380px; 
+    gap: 20px; 
+} 
+ 
+.gallery-item { 
+    min-height: 104px; 
+    padding: 16px 22px; 
+    display: flex; 
+    align-items: center; 
+    gap: 20px; 
+    background: #ffffff; 
+    border-radius: 14px; 
+    cursor: pointer; 
+    transition: transform 0.2s ease, box-shadow 0.2s ease; 
+} 
+ 
+.gallery-item:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 8px 24px rgba(18, 21, 26, 0.08); 
+} 
+ 
+.gallery-item-image { 
+    width: 76px; 
+    height: 64px; 
+    flex-shrink: 0; 
+    background: #e1e4e9; 
+    border-radius: 10px; 
+} 
+ 
+.gallery-item-content { 
+    flex: 1; 
+    min-width: 0; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    gap: 24px; 
+} 
+ 
+.gallery-item-title { 
+    font-size: 16px; 
+    font-weight: 700; 
+    white-space: nowrap; 
+} 
+ 
+.gallery-item-sub { 
+    font-size: 13px; 
+    color: #89909a; 
+    white-space: nowrap; 
+} 
+ 
+.gallery-item-arrow { 
+    width: 42px; 
+    height: 42px; 
+    flex-shrink: 0; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border-radius: 50%; 
+    color: #4267ff; 
+    font-size: 22px; 
+    transition: transform 0.2s ease; 
+} 
+ 
+.gallery-item:hover .gallery-item-arrow { 
+    transform: translateX(5px); 
+} 
+ 
+ 
+/* ========================= 
+   GALLERY HINT 
+   ========================= */ 
+ 
+.gallery-scroll-hint { 
+    min-height: 76px; 
+    padding: 14px 18px 14px 22px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    background: #12151a; 
+    border-radius: 14px; 
+    color: #ffffff; 
+    cursor: pointer; 
+} 
+ 
+.gallery-scroll-title { 
+    font-size: 12px; 
+    color: #a8afb8; 
+} 
+ 
+.gallery-scroll-text { 
+    font-size: 16px; 
+    font-weight: 700; 
+} 
+ 
+.gallery-scroll-icon { 
+    width: 50px; 
+    height: 50px; 
+    flex-shrink: 0; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border-radius: 50%; 
+    background: #4267ff; 
+    color: #ffffff; 
+    font-size: 22px; 
+} 
+ 
+ 
+/* ========================= 
+   ORDER STEPS 
+   ========================= */ 
+ 
+.order-steps { 
+    padding: 80px 56px 0; 
+} 
+ 
+.section-title { 
+    margin-top: 8px; 
+    font-size: 30px; 
+    line-height: 1.2; 
+    font-weight: 700; 
+} 
+ 
+.section-desc { 
+    max-width: 680px; 
+    margin-top: 8px; 
+    font-size: 15px; 
+    color: #69717c; 
+} 
+ 
+.steps { 
+    margin-top: 40px; 
+    display: grid; 
+    grid-template-columns: repeat(3, 210px); 
+    gap: 20px; 
+} 
+ 
+.step-card { 
+    min-height: 120px; 
+    padding: 20px; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    border-radius: 14px; 
+} 
+ 
+.step-card.light { 
+    background: #ffffff; 
+    border: 1px solid #e8ebf0; 
+} 
+ 
+.step-card.dark { 
+    background: #4267ff; 
+    color: #ffffff; 
+} 
+ 
+.step-number { 
+    margin-bottom: 8px; 
+    font-size: 13px; 
+    font-weight: 700; 
+} 
+ 
+.step-number.dark { 
+    color: #4267ff; 
+} 
+ 
+.step-number.light { 
+    color: #dde5ff; 
+} 
+ 
+.step-title { 
+    font-size: 16px; 
+    font-weight: 700; 
+} 
+ 
+.step-desc { 
+    margin-top: 4px; 
+    font-size: 13px; 
+    color: #7a818a; 
+} 
+ 
+.step-card.dark .step-desc { 
+    color: #dde5ff; 
+} 
+ 
+ 
+/* ========================= 
+   CTA 
+   ========================= */ 
+ 
+.cta-banner { 
+    margin: 80px 56px 0; 
+    padding: 24px 28px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    background: #12151a; 
+    border-radius: 14px; 
+} 
+ 
+.cta-banner-title { 
+    font-size: 28px; 
+    line-height: 1.2; 
+    font-weight: 700; 
+    color: #ffffff; 
+} 
+ 
+.cta-banner-desc { 
+    margin-top: 8px; 
+    font-size: 14px; 
+    color: #aeb4bc; 
+} 
+ 
+.cta-banner-button { 
+    background: #ffffff; 
+    color: #000000; 
+} 
+ 
+.cta-banner-button:hover { 
+    background: #4267ff; 
+    color: #ffffff; 
+} 
+ 
+ 
+/* ========================= 
+   FOOTER 
+   ========================= */ 
+ 
+.footer { 
+    min-height: 850px; 
+    margin-top: 80px; 
+    padding: 56px; 
+    background: #f7f8fa; 
+} 
+ 
+.footer-top { 
+    display: grid; 
+    grid-template-columns: minmax(0, 850px) minmax(0, 444px); 
+    gap: 40px; 
+} 
+ 
+.footer-title { 
+    margin-top: 8px; 
+    font-size: 38px; 
+    line-height: 1.15; 
+    font-weight: 700; 
+} 
+ 
+.footer-desc { 
+    margin-top: 8px; 
+    font-size: 15px; 
+    color: #69717c; 
+} 
+ 
+ 
+/* ========================= 
+   PROCESS 
+   ========================= */ 
+ 
+.process-steps { 
+    min-height: 390px; 
+    margin-top: 40px; 
+    padding: 26px; 
+    background: #ffffff; 
+    border-radius: 14px; 
+} 
+ 
+.process-step { 
+    position: relative; 
+    display: flex; 
+    gap: 18px; 
+    padding-bottom: 30px; 
+    align-items: flex-start; 
+} 
+ 
+.process-step-circle { 
+    width: 56px; 
+    height: 56px; 
+    flex-shrink: 0; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border-radius: 50%; 
+    background: #eef1f5; 
+    color: #12151a; 
+    font-size: 14px; 
+    font-weight: 700; 
+} 
+ 
+.process-step-circle.active { 
+    background: #4267ff; 
+    color: #ffffff; 
+} 
+ 
+.process-step-title { 
+    font-size: 19px; 
+    font-weight: 700; 
+} 
+ 
+.process-step-desc { 
+    max-width: 520px; 
+    margin-top: 6px; 
+    font-size: 14px; 
+    color: #69717c; 
+} 
+ 
+.process-step-line { 
+    position: absolute; 
+    left: 28px; 
+    top: 56px; 
+    width: 1px; 
+    height: 35px; 
+    background: #dde1e6; 
+} 
+ 
+ 
+/* ========================= 
+   COMPANY 
+   ========================= */ 
+ 
+.company-block { 
+    padding: 26px; 
+    background: #12151a; 
+    border-radius: 14px; 
+    color: #ffffff; 
+} 
+ 
+.footer-label-light, 
+.info-label { 
+    font-size: 11px; 
+    color: #7f8791; 
+} 
+ 
+.footer-label-light { 
+    font-weight: 700; 
+    color: #aeb4bc; 
+} 
+ 
+.company-name { 
+    margin-top: 8px; 
+    font-size: 28px; 
+    font-weight: 700; 
+} 
+ 
+.company-sub { 
+    margin-top: 4px; 
+    font-size: 14px; 
+    color: #aeb4bc; 
+} 
+ 
+.company-divider { 
+    height: 1px; 
+    margin: 20px 0; 
+    background: #30343a; 
+} 
+ 
+.info-label { 
+    margin-top: 16px; 
+} 
+ 
+.info-text { 
+    margin-top: 4px; 
+    font-size: 14px; 
+    color: #ffffff; 
+} 
+ 
+ 
+/* ========================= 
+   FOOTER BOTTOM 
+   ========================= */ 
+ 
+.footer-links { 
+    font-size: 12px; 
+    color: #89909a; 
 }
