@@ -264,7 +264,7 @@ function App() {
           </div>
 
           <div className="footer-links">
-            Yhteydenotto · Tilauslomake
+            
           </div>
         </div>
       </footer>
