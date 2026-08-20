@@ -93,55 +93,102 @@ button {
 
 /* Tietoa — строго по центру шапки */
 
-.nav {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-
-    display: flex;
+/* TIETOA */
+.nav-link {
+    height: 44px;
+    min-width: auto;
+    padding: 0 20px;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 8px;
+    border: 1px solid #dfe3ea;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #12151a;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: 0 2px 0 rgba(18, 21, 26, 0.04);
+    transition: 0.2s ease;
 }
 
-.nav-link {
-    min-width: 140px;
-    min-height: 56px;
-
-    padding: 16px 32px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 30px;
-
-    font-family: var(--font-main);
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 1;
-
-    color: #12151a;
-    background: #e9ecf1;
-
-    cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        transform 0.15s ease;
+.nav-link::before {
+    content: "i";
+    width: 18px;
+    height: 18px;
+    display: grid;
+    place-items: center;
+    border: 1.5px solid #4267ff;
+    border-radius: 50%;
+    color: #4267ff;
+    font-size: 11px;
+    font-weight: 800;
 }
 
 .nav-link:hover {
-    background: #dde2e9;
+    background: #f1f4ff;
+    border-color: #bfcaff;
+    transform: translateY(-2px);
 }
 
-.nav-link:active {
-    transform: scale(0.96);
+
+.cta-button {
+    height: 44px;
+    min-width: auto;
+    padding: 0 10px 0 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+
+    border: 1px solid #dfe3ea;
+    border-radius: 999px;
+
+    background: #ffffff;
+    color: #12151a;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    box-shadow: 0 2px 0 rgba(18, 21, 26, 0.04);
+    transition: 0.2s ease;
 }
 
-.nav-link:focus-visible {
-    outline: 3px solid #4267ff;
-    outline-offset: 3px;
+/* TILAA VEISTOS — белая кнопка */
+.cta-button {
+    height: 44px;
+    padding: 0 10px 0 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+
+    border: 1px solid #dfe3ea;
+    border-radius: 999px;
+
+    background: #ffffff !important;
+    color: #12151a !important;
+
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: none;
+}
+
+.cta-button::after {
+    content: "→";
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+
+    border: 1px solid #dfe3ea;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #4267ff;
+}
+
+.cta-button:hover {
+    background: #ffffff !important;
+    color: #12151a !important;
 }
 
 /* =========================
