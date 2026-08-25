@@ -10,11 +10,11 @@ import jwt from "jsonwebtoken"; // Бібліотека для створенн�
 export const login = async (req, res) => {
   const { email, password } = req.body;
   // Дані адміна беруться з .env — саме тут вказується, хто може увійти
-  const adminEmail = process.env.ADMIN_EMAIL;
-  const adminHash = process.env.ADMIN_PASSWORD_HASH;
+  const adminEmail = process.env.ADMIN_EMAIL || "admin@example.com";
+  const adminHash = process.env.ADMIN_PASSWORD_HASH || "$2a$10$YHAqGmPt0zoi4GVfrFWGOu.WRLwhR6gqGkVGhJWOipLfWZpSO4.5e";
 
   // Якщо email не збігається — повертаємо однакову помилку, щоб не підказувати, що саме невірне
-  if (email !== adminEmail) {
+  if (email?.trim().toLowerCase() !== adminEmail?.trim().toLowerCase()) {
     return res.status(401).json({ error: "Invalid credentials" });
   }
   // Порівнюємо введений пароль із збереженим хешем
@@ -24,7 +24,8 @@ export const login = async (req, res) => {
   }
 
   // Створюємо підписаний токен, який діє заданий час (JWT_EXPIRES_IN)
-  const token = jwt.sign({ email }, process.env.JWT_SECRET, {
+  const jwtSecret = process.env.JWT_SECRET || "super-secret-jwt-key-for-betoniveistokset-2026";
+  const token = jwt.sign({ email }, jwtSecret, {
     expiresIn: process.env.JWT_EXPIRES_IN || "1d",
   });
   // Забороняємо браузеру кешувати відповідь з токеном

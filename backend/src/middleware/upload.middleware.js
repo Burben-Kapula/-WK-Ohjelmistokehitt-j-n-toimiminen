@@ -2,9 +2,16 @@ import multer from "multer"; // Бібліотека для обробки за�
 import path from "path";
 import { fileURLToPath } from "url";
 
+import fs from "fs";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const uploadDir = path.resolve(__dirname, "../../uploads"); // Папка збереження зображень
+
+// Автоматично створюємо папку uploads, якщо вона відсутня
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
 
 // Налаштування зберігання файлів на диску
 const storage = multer.diskStorage({

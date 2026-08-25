@@ -1,3 +1,5 @@
+import fs from "fs";
+
 /**
  * Middleware валідації даних запиту через Zod-схеми.
  * Перевіряє body/query/params за схемою роута; якщо дані невірні —
@@ -11,6 +13,10 @@ export const validate = (schema) => (req, res, next) => {
     params: req.params,
   });
   if (!result.success) {
+    // Видаляємо завантажений файл, якщо валідація полів форми не пройшла
+    if (req.file?.path) {
+      fs.promises.unlink(req.file.path).catch(() => {});
+    }
     const messages = result.error.flatten().fieldErrors;
     return res.status(400).json({ error: "Validation failed", details: messages });
   }

@@ -22,7 +22,6 @@ export default function Home() {
       {/* Навігація по сайту */}
       <nav className="nav">
         <Link to="/order">Make Order</Link>
-        <Link to="/admin/login">Admin Login</Link>
       </nav>
 
       <h1>Publications</h1>

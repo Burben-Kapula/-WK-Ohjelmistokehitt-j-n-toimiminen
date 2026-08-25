@@ -1,140 +1,272 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import api from '../api'
+import { clearAdminSession } from '../utils/adminAuth'
+import '../styles/admin.css'
 
-/**
- * Панель керування адміна.
- * Дозволяє: створювати публікації, редагувати наявні, видаляти їх,
- * а також переглядати список усіх публікацій.
- * Доступ захищено токеном (без нього — редирект на сторінку входу).
- */
 export default function AdminPanel() {
   const navigate = useNavigate()
-  const [form, setForm] = useState({ title: '', description: '', image: null }) // Поля форми створення/редагування
-  const [editingId, setEditingId] = useState(null) // ID публікації, яку зараз редагуємо (null = створення нової)
-  const [posts, setPosts] = useState([]) // Список публікацій для панелі
-  const [msg, setMsg] = useState({ text: '', type: '' }) // Повідомлення про результат операції
+  const fileInputRef = useRef(null)
+  const [form, setForm] = useState({ title: '', description: '', image: null })
+  const [editingId, setEditingId] = useState(null)
+  const [posts, setPosts] = useState([])
+  const [msg, setMsg] = useState({ text: '', type: '' })
+  const [loading, setLoading] = useState(false)
 
-  // Завантаження списку публікацій з бекенду (GET /api/posts)
+  const handleUnauthorized = () => {
+    localStorage.removeItem('token')
+    navigate('/admin/login', { replace: true })
+  }
+
   const loadPosts = () => {
     api.get('/posts')
       .then(r => setPosts(r.data))
-      .catch(() => setMsg({ text: 'Failed to load posts', type: 'error' }))
+      .catch(err => {
+        if (err.response?.status === 401) {
+          handleUnauthorized()
+        } else {
+          setMsg({ text: 'Julkaisuja ei voitu ladata. Yritä uudelleen.', type: 'error' })
+        }
+      })
   }
 
-  // При відкритті сторінки: якщо немає токена — на вхід, інакше завантажуємо публікації
   useEffect(() => {
-    if (!localStorage.getItem('token')) navigate('/admin/login')
-    else loadPosts()
+    if (!localStorage.getItem('token')) {
+      handleUnauthorized()
+    } else {
+      loadPosts()
+    }
   }, [navigate])
 
-  // Оновлення поля форми: файл зберігаємо окремо, решту — за іменем поля
   const handleChange = e => {
     if (e.target.type === 'file') setForm({ ...form, image: e.target.files[0] })
     else setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  // Створення нової або збереження редагованої публікації
   const handleSubmit = async e => {
     e.preventDefault()
     setMsg({ text: '', type: '' })
-    // Формуємо multipart-дані: поля тексту + необов'язкове зображення
+
+    if (!editingId && !form.image) {
+      setMsg({ text: 'Valitse kuva ennen julkaisemista.', type: 'error' })
+      return
+    }
+
+    setLoading(true)
     const fd = new FormData()
-    fd.append('title', form.title)
-    fd.append('description', form.description)
+    fd.append('title', form.title.trim())
+    fd.append('description', form.description.trim())
     if (form.image) fd.append('image', form.image)
 
     try {
       if (editingId) {
-        // Режим редагування: PUT /api/posts/:id
         await api.put(`/posts/${editingId}`, fd)
-        setMsg({ text: 'Post updated!', type: 'success' })
+        setMsg({ text: 'Veistos päivitetty onnistuneesti! ✅', type: 'success' })
       } else {
-        // Режим створення: POST /api/posts
         await api.post('/posts', fd)
-        setMsg({ text: 'Post created!', type: 'success' })
+        setMsg({ text: 'Uusi veistos julkaistu! ✅', type: 'success' })
       }
-      setForm({ title: '', description: '', image: null }) // Очищаємо форму
+      setForm({ title: '', description: '', image: null })
+      if (fileInputRef.current) fileInputRef.current.value = ''
       setEditingId(null)
-      loadPosts() // Оновлюємо список
+      loadPosts()
     } catch (err) {
-      // Показуємо справжню помилку від бекенду
-      setMsg({ text: err.response?.data?.error || 'Failed to save post', type: 'error' })
+      if (err.response?.status === 401) { handleUnauthorized(); return }
+      let errorText = err.response?.data?.error || 'Tallennus epäonnistui'
+      if (err.response?.data?.details) {
+        const fieldMsgs = Object.entries(err.response.data.details)
+          .map(([field, msgs]) => `${field}: ${Array.isArray(msgs) ? msgs.join(', ') : msgs}`)
+          .join(' | ')
+        if (fieldMsgs) errorText = `${errorText}: ${fieldMsgs}`
+      }
+      setMsg({ text: errorText, type: 'error' })
+    } finally {
+      setLoading(false)
     }
   }
 
-  // Початок редагування: заповнюємо форму даними публікації
   const startEdit = p => {
     setEditingId(p.id)
     setForm({ title: p.title, description: p.description, image: null })
-    window.scrollTo({ top: 0, behavior: 'smooth' }) // Прокрутка до форми
+    if (fileInputRef.current) fileInputRef.current.value = ''
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  // Відміна редагування: повертаємося до режиму створення
   const cancelEdit = () => {
     setEditingId(null)
     setForm({ title: '', description: '', image: null })
+    if (fileInputRef.current) fileInputRef.current.value = ''
   }
 
-  // Видалення публікації (з підтвердженням у діалозі)
   const handleDelete = async p => {
-    if (!window.confirm(`Delete "${p.title}"?`)) return
+    if (!window.confirm(`Poistetaanko veistos "${p.title}"?`)) return
     try {
       await api.delete(`/posts/${p.id}`)
-      setMsg({ text: 'Post deleted', type: 'success' })
+      setMsg({ text: 'Veistos poistettu.', type: 'success' })
       loadPosts()
     } catch (err) {
-      setMsg({ text: err.response?.data?.error || 'Failed to delete post', type: 'error' })
+      if (err.response?.status === 401) { handleUnauthorized(); return }
+      setMsg({ text: err.response?.data?.error || 'Poistaminen epäonnistui', type: 'error' })
     }
   }
 
-  // Вихід із панелі: видаляємо токен і повертаємось на сторінку входу
   const logout = () => {
     localStorage.removeItem('token')
     navigate('/admin/login')
   }
 
+  const lockSession = () => {
+    clearAdminSession()
+    navigate('/', { replace: true })
+  }
+
   return (
-    <div className="container">
-      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'20px' }}>
-        <h1>Admin Panel</h1>
-        <div style={{ display:'flex', gap:'10px' }}>
-          <Link to="/" className="btn">Back to Publications</Link>
-          <button onClick={logout}>Logout</button>
+    <div className="ap-page">
+
+      {/* ── Top bar ── */}
+      <header className="ap-header">
+        <div className="ap-header-left">
+          <span className="ap-logo">🗿</span>
+          <div>
+            <div className="ap-header-title">Hallintapaneeli</div>
+            <div className="ap-header-sub">K.Betoniveistokset</div>
+          </div>
         </div>
-      </div>
-
-      {msg.text && <div className={`msg ${msg.type}`}>{msg.text}</div>}
-
-      {/* Форма: створення або редагування (заголовок змінюється залежно від режиму) */}
-      <h2>{editingId ? 'Edit Post' : 'Create Post'}</h2>
-      <form onSubmit={handleSubmit}>
-        <input name="title" placeholder="Title" value={form.title} onChange={handleChange} required />
-        <textarea name="description" placeholder="Description" value={form.description} onChange={handleChange} rows={3} required />
-        {/* При редагуванні файл необов'язковий — можна залишити старе зображення */}
-        <input type="file" name="image" accept="image/*" onChange={handleChange} />
-        <div style={{ display:'flex', gap:'10px' }}>
-          <button type="submit">{editingId ? 'Save Changes' : 'Create Post'}</button>
-          {editingId && <button type="button" onClick={cancelEdit} style={{ background:'#888' }}>Cancel</button>}
+        <div className="ap-header-actions">
+          <Link to="/" className="ap-header-link">← Etusivu</Link>
+          <button className="ap-btn ap-btn-ghost" onClick={logout}>Kirjaudu ulos</button>
         </div>
-      </form>
+      </header>
 
-      {/* Список публікацій з кнопками редагування і видалення */}
-      <h2>Posts</h2>
-      <ul>
-        {posts.map(p => (
-          <li key={p.id} className="post">
-            <h3>{p.title}</h3>
-            <p>{p.description}</p>
-            {p.imageUrl && <img src={p.imageUrl} alt={p.title} style={{ maxHeight:'120px', width:'auto' }} />}
-            <div style={{ display:'flex', gap:'10px', marginTop:'10px' }}>
-              <button type="button" onClick={() => startEdit(p)}>Edit</button>
-              <button type="button" onClick={() => handleDelete(p)} style={{ background:'#cc0000' }}>Delete</button>
+      <main className="ap-main">
+
+        {/* ── Alert message ── */}
+        {msg.text && (
+          <div className={`ap-alert ap-alert--${msg.type}`}>
+            <span>{msg.type === 'error' ? '⚠️' : '✅'}</span>
+            <span>{msg.text}</span>
+            <button className="ap-alert-close" onClick={() => setMsg({ text: '', type: '' })}>✕</button>
+          </div>
+        )}
+
+        {/* ── Form card ── */}
+        <section className="ap-card">
+          <h2 className="ap-card-title">
+            {editingId ? '✏️  Muokkaa veistosta' : '➕  Lisää uusi veistos'}
+          </h2>
+
+          <form onSubmit={handleSubmit} className="ap-form">
+            <div className="ap-field">
+              <label className="ap-label" htmlFor="ap-title">Nimi</label>
+              <input
+                id="ap-title"
+                name="title"
+                className="ap-input"
+                placeholder="esim. Karhuveistos 120 cm"
+                value={form.title}
+                onChange={handleChange}
+                minLength={3}
+                maxLength={100}
+                required
+              />
             </div>
-          </li>
-        ))}
-        {posts.length === 0 && <li>No posts yet.</li>}
-      </ul>
+
+            <div className="ap-field">
+              <label className="ap-label" htmlFor="ap-desc">Kuvaus</label>
+              <textarea
+                id="ap-desc"
+                name="description"
+                className="ap-textarea"
+                placeholder="Kerro veistoksen materiaaleista, koosta, väristä..."
+                value={form.description}
+                onChange={handleChange}
+                rows={4}
+                minLength={10}
+                maxLength={2000}
+                required
+              />
+            </div>
+
+            <div className="ap-field">
+              <label className="ap-label" htmlFor="ap-image">
+                {editingId ? 'Vaihda kuva (valinnainen)' : 'Kuva *'}
+              </label>
+              <input
+                id="ap-image"
+                ref={fileInputRef}
+                type="file"
+                name="image"
+                className="ap-input ap-file"
+                accept="image/*"
+                onChange={handleChange}
+                required={!editingId}
+              />
+              <p className="ap-hint">JPG, PNG tai WebP · max. 10 MB</p>
+            </div>
+
+            <div className="ap-form-actions">
+              <button type="submit" className="ap-btn ap-btn-primary" disabled={loading}>
+                {loading ? 'Tallennetaan...' : editingId ? '💾  Tallenna muutokset' : '🚀  Julkaise veistos'}
+              </button>
+              {editingId && (
+                <button type="button" className="ap-btn ap-btn-ghost" onClick={cancelEdit}>
+                  Peruuta
+                </button>
+              )}
+            </div>
+          </form>
+        </section>
+
+        {/* ── Posts list ── */}
+        <section className="ap-card">
+          <div className="ap-card-head">
+            <h2 className="ap-card-title">🖼️  Julkaistut veistokset ({posts.length})</h2>
+            <button className="ap-btn ap-btn-ghost ap-btn-sm" onClick={loadPosts} type="button">
+              🔄 Päivitä
+            </button>
+          </div>
+
+          {posts.length === 0 ? (
+            <div className="ap-empty">
+              <span>Ei vielä julkaisuja.</span>
+              <span>Lisää ensimmäinen veistos yllä olevalla lomakkeella.</span>
+            </div>
+          ) : (
+            <ul className="ap-grid">
+              {posts.map((p, idx) => (
+                <li key={p.id || idx} className="ap-post-card">
+                  {p.imageUrl ? (
+                    <img src={p.imageUrl} alt={p.title} className="ap-post-img" />
+                  ) : (
+                    <div className="ap-post-img ap-post-img--empty">Ei kuvaa</div>
+                  )}
+                  <div className="ap-post-body">
+                    <h3 className="ap-post-title">{p.title}</h3>
+                    <p className="ap-post-desc">{p.description}</p>
+                    <div className="ap-post-actions">
+                      <button
+                        type="button"
+                        className="ap-btn ap-btn-secondary"
+                        onClick={() => startEdit(p)}
+                      >
+                        ✏️  Muokkaa
+                      </button>
+                      <button
+                        type="button"
+                        className="ap-btn ap-btn-danger"
+                        onClick={() => handleDelete(p)}
+                      >
+                        🗑️  Poista
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+
+      </main>
     </div>
   )
 }

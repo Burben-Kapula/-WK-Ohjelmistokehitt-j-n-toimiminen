@@ -14,8 +14,8 @@ export const authRequired = (req, res, next) => {
   }
   const token = header.split(" ")[1];
   try {
-    // Перевіряємо підпис і термін дії токена за допомогою JWT_SECRET
-    const payload = jwt.verify(token, process.env.JWT_SECRET);
+    const jwtSecret = process.env.JWT_SECRET || "super-secret-jwt-key-for-betoniveistokset-2026";
+    const payload = jwt.verify(token, jwtSecret);
     req.admin = payload; // Зберігаємо дані адміна з токена для наступних middleware
     next();
   } catch (err) {
