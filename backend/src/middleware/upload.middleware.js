@@ -44,3 +44,22 @@ const maxSize = Number(process.env.MAX_FILE_SIZE) || 5 * 1024 * 1024;
  */
 export const uploadSingle = (fieldName) =>
   multer({ storage, fileFilter, limits: { fileSize: maxSize } }).single(fieldName);
+
+// Дозволені типи файлів у формі замовлення з лендінгу (зображення + PDF)
+const orderAllowed = ["image/jpeg", "image/png", "application/pdf"];
+
+// Файли замовлення тримаємо в пам'яті — вони одразу йдуть у лист, на диск не зберігаються
+const orderFileFilter = (req, file, cb) => {
+  if (orderAllowed.includes(file.mimetype)) cb(null, true);
+  else cb(new Error("Unsupported file type"), false);
+};
+
+/**
+ * Middleware завантаження файлів форми замовлення (поле "files", до 5 файлів).
+ * Дані залишаються в req.files[].buffer і додаються до листа.
+ */
+export const uploadOrderFiles = multer({
+  storage: multer.memoryStorage(),
+  fileFilter: orderFileFilter,
+  limits: { fileSize: maxSize, files: 5 },
+}).array("files", 5);

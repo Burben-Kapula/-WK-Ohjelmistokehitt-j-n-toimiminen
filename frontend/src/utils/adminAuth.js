@@ -1,11 +1,11 @@
 const ADMIN_SECRET_STORAGE_KEY = 'admin_access_session'
 
 /**
- * Returns the expected admin secret key from environment variables
- * or defaults to the fallback secret.
+ * Returns the expected admin secret key from environment variables.
+ * Fail closed: if VITE_ADMIN_SECRET_KEY is missing, access is denied.
  */
 export function getExpectedSecretKey() {
-  return import.meta.env.VITE_ADMIN_SECRET_KEY || 'betoni-admin-secret-2026'
+  return import.meta.env.VITE_ADMIN_SECRET_KEY || ''
 }
 
 /**
@@ -13,7 +13,12 @@ export function getExpectedSecretKey() {
  */
 export function isValidSecretKey(key) {
   if (!key || typeof key !== 'string') return false
-  return key.trim() === getExpectedSecretKey().trim()
+  const expected = getExpectedSecretKey().trim()
+  if (!expected) {
+    console.warn('Admin secret key is not configured. Set VITE_ADMIN_SECRET_KEY in frontend/.env')
+    return false
+  }
+  return key.trim() === expected
 }
 
 /**

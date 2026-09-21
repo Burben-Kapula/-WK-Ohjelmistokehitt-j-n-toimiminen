@@ -13,8 +13,12 @@ export const authRequired = (req, res, next) => {
     return res.status(401).json({ error: "Missing or invalid Authorization header" });
   }
   const token = header.split(" ")[1];
+  const jwtSecret = process.env.JWT_SECRET;
+  if (!jwtSecret) {
+    console.error("❗ JWT_SECRET is not configured in backend/.env");
+    return res.status(500).json({ error: "Server auth is not configured" });
+  }
   try {
-    const jwtSecret = process.env.JWT_SECRET || "super-secret-jwt-key-for-betoniveistokset-2026";
     const payload = jwt.verify(token, jwtSecret);
     req.admin = payload; // Зберігаємо дані адміна з токена для наступних middleware
     next();

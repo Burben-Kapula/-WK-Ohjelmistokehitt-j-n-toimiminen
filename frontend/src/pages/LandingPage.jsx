@@ -11,6 +11,8 @@ export default function LandingPage() {
   const [isVisible, setIsVisible] = useState(false);
   const [isOrderOpen, setIsOrderOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [posts, setPosts] = useState([]);
   const [activePostIndex, setActivePostIndex] = useState(0);
 
@@ -27,6 +29,7 @@ export default function LandingPage() {
   const openOrderForm = () => {
     setIsOrderOpen(true);
     setIsSubmitted(false);
+    setSubmitError("");
     setTimeout(() => scrollTo(orderRef), 100);
   };
 
@@ -38,10 +41,25 @@ export default function LandingPage() {
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
-  const handleOrderSubmit = (e) => {
+  const handleOrderSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => scrollTo(orderRef), 100);
+    const formData = new FormData(e.currentTarget); // поля + файли форми
+
+    setSubmitting(true);
+    setSubmitError("");
+    try {
+      await api.post("/order/request", formData);
+      setIsSubmitted(true);
+      setTimeout(() => scrollTo(orderRef), 100);
+    } catch (err) {
+      const details = err.response?.data?.details;
+      const firstDetail = details && Object.values(details).flat()[0];
+      setSubmitError(
+        firstDetail || err.response?.data?.error || "Lähetyksessä tapahtui virhe. Yritä uudelleen."
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -207,12 +225,19 @@ export default function LandingPage() {
                       <input id="files" name="files" type="file" accept=".png,.jpg,.jpeg,.pdf" multiple />
                     </label>
                   </div>
+                  {submitError && (
+                    <div className="msg error" role="alert" style={{ marginBottom: "12px" }}>
+                      {submitError}
+                    </div>
+                  )}
                   <div className="order-form-bottom">
                     <label className="order-checkbox">
                       <input type="checkbox" required />
                       <span>Hyväksyn, että minuun otetaan yhteyttä tilaukseen liittyen.</span>
                     </label>
-                    <button type="submit" className="order-submit">LÄHETÄ TILAUS<span>→</span></button>
+                    <button type="submit" className="order-submit" disabled={submitting}>
+                      {submitting ? "LÄHETETÄÄN..." : "LÄHETÄ TILAUS"}<span>→</span>
+                    </button>
                   </div>
                 </form>
               ) : (

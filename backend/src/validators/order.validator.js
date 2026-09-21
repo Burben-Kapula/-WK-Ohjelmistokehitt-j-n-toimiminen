@@ -21,3 +21,17 @@ export const orderSchema = z.object({
     orderText: z.string().min(10).max(1000), // текст замовлення: від 10 до 1000 символів
   }),
 });
+
+/**
+ * Схема замовлення з головного лендінгу (POST /api/order-request).
+ * Поля надходять як multipart/form-data (разом з необов'язковими файлами).
+ */
+export const orderRequestSchema = z.object({
+  body: z.object({
+    firstName: z.string().min(2).max(50),
+    lastName: z.string().min(2).max(50),
+    email: z.string().email(),
+    phone: z.string().regex(phoneRegex, "Invalid phone format"),
+    description: z.string().min(10).max(2000),
+  }),
+});
