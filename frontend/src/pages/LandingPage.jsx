@@ -159,14 +159,29 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="order-steps">
+<section className="order-steps">
           <h2 className="section-label">TILAAMINEN</h2>
-          <h3 className="section-title">Tilaa helposti ilman verkkokauppaa.</h3>
-          <p className="section-desc">Täytä lomake, kerro toiveesi ja jätä yhteystietosi.</p>
+          <h3 className="section-title">Näin tilaaminen toimii.</h3>
+          <p className="section-desc">Ei monimutkaisia verkkokauppoja – suoraan ja vaivattomasti.</p>
           <div className="steps">
-            <StepCard number="01" title="Valitse" desc="tuotteen tiedot" variant="light" />
-            <StepCard number="02" title="Lähetä" desc="tilauslomake" variant="light" />
-            <StepCard number="03" title="Sovitaan" desc="tilauksen yksityiskohdat" variant="dark" />
+            <StepCard 
+              number="01" 
+              title="Kerro toiveesi" 
+              desc="Kuvaile millaisen veistoksen haluat, anna mitat tai lähetä viitekuva." 
+              variant="light" 
+            />
+            <StepCard 
+              number="02" 
+              title="Vahvistus" 
+              desc="Katsotaan tiedot läpi ja otamme sinuun yhteyttä 2 arkipäivän kuluessa." 
+              variant="light" 
+            />
+            <StepCard 
+              number="03" 
+              title="Toteutus" 
+              desc="Valmistamme yksilöllisen betoniveistoksen käsityönä Suomessa." 
+              variant="dark" 
+            />
           </div>
         </section>
 
