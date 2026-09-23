@@ -3,12 +3,9 @@
 /* =========================================================
    ГОЛОВНІ ЗМІННІ ТА ЄДИНІ СТАНДАРТИ РОЗМІРІВ ШРИФТІВ
    ========================================================= */
-
-
-   :root {
+:root {
   --font: "Nunito Sans", sans-serif;
 
-  /* Уменьшили размеры, чтобы длинные заголовки не выглядели огромными */
   --text-hero: clamp(34px, 5vw, 56px);    
   --text-title: clamp(20px, 3vw, 32px);   
   --text-body: 15px;                      
@@ -104,7 +101,7 @@ img {
 }
 
 /* =========================================================
-   ШАПКА САЙТУ (HEADER ТА НАВІГАЦІЯ)
+   ШАПКА САЙТУ (HEADER ТА НАВІГАЦІЯ) — ИСПРАВЛЕНО ПОД БОЛЬШОЙ ЛОГОТИП
    ========================================================= */
 .header {
   position: sticky;
@@ -112,16 +109,16 @@ img {
   z-index: 100;
 
   width: 100%;
-  height: 76px;
+  min-height: 82px;
 
   margin-top: 18px;
-  padding: 0 16px 0 24px;
+  padding: 12px 18px 12px 24px;
 
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
 
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.94);
   border: 1px solid rgba(17, 18, 22, 0.08);
   border-radius: 999px;
 
@@ -132,8 +129,9 @@ img {
 }
 
 .logo {
-  width: 175px;
-  height: auto;
+  width: 290px !important;
+  height: auto !important;
+  max-width: none !important;
   object-fit: contain;
   flex-shrink: 0;
 }
@@ -141,7 +139,7 @@ img {
 .nav {
   display: flex;
   align-items: center;
-  margin-left: auto; /* Переносить навигацию вправо к кнопке */
+  margin-left: auto;
 }
 
 .nav-link {
@@ -286,7 +284,6 @@ img {
   background: var(--accent);
 }
 
-/* Приведений до єдиного стандарту головний заголовок */
 .hero-title {
   max-width: 950px;
   margin: 0;
@@ -295,9 +292,9 @@ img {
   font-weight: 900;
   letter-spacing: -.05em;
   text-transform: uppercase;
+  word-break: break-word;
 }
 
-/* Рівний опис під головним заголовком */
 .hero-desc {
   max-width: 520px;
   margin: 24px 0 0 0;
@@ -376,6 +373,8 @@ img {
   line-height: 1.1;
   font-weight: 900;
   letter-spacing: -.04em;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .gallery-main-desc {
@@ -383,6 +382,7 @@ img {
   margin-top: 12px;
   color: rgba(255,255,255,.72);
   font-size: var(--text-body);
+  word-break: break-word;
 }
 
 .image-caption {
@@ -637,7 +637,6 @@ img {
   letter-spacing: .16em;
 }
 
-/* Приведений до єдиного стандарту заголовок секцій */
 .section-title {
   max-width: 650px;
   margin: 12px 0 0;
@@ -645,6 +644,7 @@ img {
   line-height: 1.1;
   font-weight: 900;
   letter-spacing: -.04em;
+  word-break: break-word;
 }
 
 .section-desc {
@@ -768,6 +768,7 @@ img {
   line-height: 1.1;
   font-weight: 900;
   letter-spacing: -.04em;
+  word-break: break-word;
 }
 
 .cta-banner-desc {
@@ -845,6 +846,7 @@ img {
   line-height: 1.1;
   font-weight: 900;
   letter-spacing: -.04em;
+  word-break: break-word;
 }
 
 .order-form-description {
@@ -1165,7 +1167,6 @@ img {
   min-width: 0;
 }
 
-/* Приведений до єдиного стандарту заголовок «Tietoa» */
 .tietoa__content h2 {
   max-width: 750px;
   margin: 0 0 35px;
@@ -1173,15 +1174,16 @@ img {
   line-height: 1.1;
   font-weight: 900;
   letter-spacing: -.045em;
+  word-break: break-word;
 }
 
-/* Рівні інтервали між абзацами без проплешин */
 .tietoa__content p {
   max-width: 680px;
   margin: 0 0 14px;
   color: var(--muted);
   font-size: var(--text-body);
   line-height: 1.65;
+  word-break: break-word;
 }
 
 .tietoa__content strong {
@@ -1434,13 +1436,13 @@ img {
   .header {
     position: sticky;
     top: 10px;
-    height: 62px;
+    min-height: 64px;
     margin-top: 10px;
-    padding: 7px 8px 7px 15px;
+    padding: 8px 12px;
   }
 
   .logo {
-    width: 125px;
+    width: 180px !important;
   }
 
   .cta-button {

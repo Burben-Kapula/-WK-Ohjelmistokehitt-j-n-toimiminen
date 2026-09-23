@@ -23,6 +23,11 @@ export default function LandingPage() {
 
   const mainPost = posts[activePostIndex] || posts[0] || null;
 
+  const getCleanTitle = (title, fallback) => {
+    if (!title || title.includes('.') || title.length > 40) return fallback;
+    return title;
+  };
+
   const scrollTo = (ref) => ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
 
   const openOrderForm = () => {
@@ -68,7 +73,7 @@ export default function LandingPage() {
           src={logoImg} 
           alt="k.Betoniveistokset" 
           className="logo" 
-          style={{ width: "260px", height: "auto", maxWidth: "none" }} 
+          style={{ width: "290px", height: "auto", maxWidth: "none" }}
         />
         {isVisible && (
           <button className="back-to-top" onClick={scrollToTop} aria-label="Takaisin ylös">↑</button>
@@ -91,13 +96,14 @@ export default function LandingPage() {
             <div className="gallery-main-image">
               {mainPost?.imageUrl ? (
                 <>
-                  <img src={mainPost.imageUrl} alt={mainPost.title} className="gallery-main-img" />
+                  <img src={mainPost.imageUrl} alt="Veistos" className="gallery-main-img" />
                   <div className="gallery-main-overlay">
                     <div className="gallery-main-badge">
                       {activePostIndex === 0 ? "PÄÄVEISTOS" : `VEISTOS ${String(activePostIndex + 1).padStart(2, "0")}`}
                     </div>
-                    <div className="gallery-main-title">{mainPost.title}</div>
-                    {mainPost.description && <div className="gallery-main-desc">{mainPost.description}</div>}
+                    <div className="gallery-main-title">
+                      {getCleanTitle(mainPost.title, "Uniikki käsin tehty veistos")}
+                    </div>
                   </div>
                   {posts.length > 1 && (
                     <>
@@ -123,12 +129,13 @@ export default function LandingPage() {
               {posts.length > 1 ? (
                 posts.slice(1).map((post, idx) => {
                   const itemIndex = idx + 1;
+                  const displayTitle = getCleanTitle(post.title, `Veistos ${String(itemIndex + 1).padStart(2, "0")}`);
                   return (
                     <GalleryItem
                       key={post.id || itemIndex}
                       number={String(itemIndex + 1).padStart(2, "0")}
-                      label={post.title || `Veistos ${itemIndex + 1}`}
-                      sub={post.description ? (post.description.length > 45 ? `${post.description.slice(0, 45)}...` : post.description) : "Seuraava työ"}
+                      label={displayTitle}
+                      sub="Käsityönä Suomesta"
                       image={post.imageUrl}
                       isActive={activePostIndex === itemIndex}
                       onClick={() => setActivePostIndex(itemIndex)}
@@ -137,8 +144,8 @@ export default function LandingPage() {
                 })
               ) : (
                 <>
-                  <GalleryItem number="02" label="Veistos 02" sub="Seuraava työ" />
-                  <GalleryItem number="03" label="Veistos 03" sub="Seuraava työ" />
+                  <GalleryItem number="02" label="Veistos 02" sub="Käsityönä Suomesta" />
+                  <GalleryItem number="03" label="Veistos 03" sub="Käsityönä Suomesta" />
                 </>
               )}
               <div className="gallery-scroll-hint" onClick={() => scrollTo(targetRef)}>
@@ -251,7 +258,6 @@ export default function LandingPage() {
                     <div className="order-success-label">TILAUS VASTAANOTETTU</div>
                     <h3>Kiitos tilauksestasi!</h3>
                     <p>Tilauksesi on vastaanotettu ja välitetään sähköpostiimme käsiteltäväksi. Tarkistamme toiveesi ja otamme sinuun yhteyttä 2 arkipäivän kuluessa.</p>
-                    <p className="order-success-note">Voit olla rauhallisin mielin — tilauksesi ei mennyt hukkaan.</p>
                   </div>
                 </div>
               )}
