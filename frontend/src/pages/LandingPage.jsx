@@ -2,8 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import api from "../api";
 import "../styles/fonts.css";
 import "../App.css";
-
-import logo from "../assets/logo/Logo.svg";
+import logoImg from "../assets/logo/logo.png";
 
 export default function LandingPage() {
   const targetRef = useRef(null);
@@ -43,7 +42,7 @@ export default function LandingPage() {
 
   const handleOrderSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget); // поля + файли форми
+    const formData = new FormData(e.currentTarget);
 
     setSubmitting(true);
     setSubmitError("");
@@ -65,7 +64,12 @@ export default function LandingPage() {
   return (
     <div className="page">
       <header className="header">
-        <img src={logo} alt="K.BETONIVEISTOKSET" className="logo" />
+        <img 
+          src={logoImg} 
+          alt="k.Betoniveistokset" 
+          className="logo" 
+          style={{ width: "260px", height: "auto", maxWidth: "none" }} 
+        />
         {isVisible && (
           <button className="back-to-top" onClick={scrollToTop} aria-label="Takaisin ylös">↑</button>
         )}

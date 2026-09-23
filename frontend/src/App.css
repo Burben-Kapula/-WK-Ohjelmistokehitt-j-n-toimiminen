@@ -1,7 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700;800;900&display=swap");
 
-:root {
+/* =========================================================
+   ГОЛОВНІ ЗМІННІ ТА ЄДИНІ СТАНДАРТИ РОЗМІРІВ ШРИФТІВ
+   ========================================================= */
+
+
+   :root {
   --font: "Nunito Sans", sans-serif;
+
+  /* Уменьшили размеры, чтобы длинные заголовки не выглядели огромными */
+  --text-hero: clamp(34px, 5vw, 56px);    
+  --text-title: clamp(20px, 3vw, 32px);   
+  --text-body: 15px;                      
+  --text-small: 12px;                     
 
   --ink: #111216;
   --muted: #74767c;
@@ -27,9 +38,8 @@
 }
 
 /* =========================================================
-   RESET
+   БАЗОВИЙ СКИНУТИЙ КОД (RESET)
    ========================================================= */
-
 *,
 *::before,
 *::after {
@@ -52,7 +62,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font);
-  font-size: 15px;
+  font-size: var(--text-body);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
@@ -85,9 +95,8 @@ img {
 }
 
 /* =========================================================
-   PAGE
+   ОКРЕМІ СТОРІНКОВІ КОНТЕЙНЕРИ (PAGE CONTAINER)
    ========================================================= */
-
 .page {
   width: min(calc(100% - 32px), var(--container));
   margin: 0 auto;
@@ -95,44 +104,44 @@ img {
 }
 
 /* =========================================================
-   HEADER
+   ШАПКА САЙТУ (HEADER ТА НАВІГАЦІЯ)
    ========================================================= */
-
 .header {
   position: sticky;
   top: 18px;
   z-index: 100;
 
   width: 100%;
-  height: 72px;
+  height: 76px;
 
   margin-top: 18px;
-  padding: 10px 12px 10px 22px;
+  padding: 0 16px 0 24px;
 
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
   align-items: center;
+  gap: 16px;
 
-  background: rgba(255, 255, 255, 0.86);
+  background: rgba(255, 255, 255, 0.92);
   border: 1px solid rgba(17, 18, 22, 0.08);
   border-radius: 999px;
 
-  box-shadow:
-    0 10px 35px rgba(17, 18, 22, 0.07);
+  box-shadow: 0 10px 35px rgba(17, 18, 22, 0.07);
 
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
 }
 
 .logo {
-  width: 152px;
+  width: 175px;
   height: auto;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .nav {
   display: flex;
   align-items: center;
-  justify-content: center;
+  margin-left: auto; /* Переносить навигацию вправо к кнопке */
 }
 
 .nav-link {
@@ -158,10 +167,8 @@ img {
 
 .nav-link::before {
   content: "";
-
   width: 7px;
   height: 7px;
-
   border-radius: 50%;
   background: var(--accent);
 }
@@ -172,8 +179,7 @@ img {
 }
 
 .cta-button {
-  justify-self: end;
-
+  flex-shrink: 0;
   min-height: 48px;
   padding: 0 7px 0 20px;
 
@@ -203,11 +209,9 @@ img {
   place-items: center;
 
   border-radius: 50%;
-
   background: var(--accent);
 
   font-size: 17px;
-
   transition: transform .25s var(--ease);
 }
 
@@ -223,9 +227,8 @@ img {
 }
 
 /* =========================================================
-   BACK TO TOP
+   КНОПКА «НАГОРИ» (BACK TO TOP)
    ========================================================= */
-
 .back-to-top {
   position: fixed;
   right: 26px;
@@ -239,12 +242,10 @@ img {
   place-items: center;
 
   border-radius: 50%;
-
   background: var(--ink);
   color: #fff;
 
   font-size: 19px;
-
   box-shadow: 0 12px 30px rgba(0, 0, 0, .18);
 
   transition:
@@ -258,9 +259,8 @@ img {
 }
 
 /* =========================================================
-   HERO
+   ГОЛОВНИЙ ЕКРАН (HERO SECTION)
    ========================================================= */
-
 .hero {
   padding-top: 105px;
 }
@@ -271,10 +271,9 @@ img {
   gap: 10px;
 
   margin-bottom: 22px;
-
   color: var(--accent);
 
-  font-size: 11px;
+  font-size: var(--text-small);
   line-height: 1;
   font-weight: 900;
   letter-spacing: .16em;
@@ -282,81 +281,65 @@ img {
 
 .hero-label::before {
   content: "";
-
   width: 30px;
   height: 1px;
-
   background: var(--accent);
 }
 
+/* Приведений до єдиного стандарту головний заголовок */
 .hero-title {
-  max-width: 1050px;
-
+  max-width: 950px;
   margin: 0;
-
-  font-size: clamp(64px, 9vw, 116px);
-  line-height: .83;
-
+  font-size: var(--text-hero);
+  line-height: 0.95;
   font-weight: 900;
-  letter-spacing: -.075em;
-
+  letter-spacing: -.05em;
   text-transform: uppercase;
 }
 
+/* Рівний опис під головним заголовком */
 .hero-desc {
-  max-width: 470px;
-
-  margin: 34px 0 0 52%;
-
+  max-width: 520px;
+  margin: 24px 0 0 0;
   font-size: 17px;
-  line-height: 1.65;
-
+  line-height: 1.6;
   color: var(--muted);
 }
 
 /* =========================================================
-   GALLERY
+   ГАЛЕРЕЯ ТА КАРТИНКИ (GALLERY SECTION)
    ========================================================= */
-
 .gallery-placeholder {
   margin-top: 70px;
   padding: 12px;
 
   background: var(--white);
   border: 1px solid var(--line);
-
   border-radius: var(--radius-lg);
 
-  box-shadow:
-    0 25px 70px rgba(17, 18, 22, .08);
+  box-shadow: 0 25px 70px rgba(17, 18, 22, .08);
 }
 
 .gallery-main-image {
   position: relative;
-
   width: 100%;
   height: 590px;
 
   overflow: hidden;
-
   display: flex;
   align-items: center;
   justify-content: center;
 
   background: #d5d5d0;
-
   border-radius: 23px;
 }
 
 .gallery-main-img {
   position: absolute;
   inset: 0;
-
   width: 100%;
   height: 100%;
-
   object-fit: cover;
-
   transition: transform .7s var(--ease);
 }
 
@@ -367,61 +350,50 @@ img {
 .gallery-main-overlay {
   position: absolute;
   inset: auto 0 0;
-
   z-index: 2;
 
   padding: 110px 42px 38px;
-
-  background:
-    linear-gradient(
-      to top,
-      rgba(0, 0, 0, .82),
-      rgba(0, 0, 0, .42) 45%,
-      transparent
-    );
-
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, .82),
+    rgba(0, 0, 0, .42) 45%,
+    transparent
+  );
   color: #fff;
 }
 
 .gallery-main-badge {
   margin-bottom: 8px;
-
-  font-size: 10px;
+  font-size: var(--text-small);
   font-weight: 900;
   letter-spacing: .17em;
-
   color: #aab7ff;
 }
 
 .gallery-main-title {
   max-width: 720px;
-
-  font-size: clamp(28px, 4vw, 48px);
-  line-height: 1;
+  font-size: var(--text-title);
+  line-height: 1.1;
   font-weight: 900;
   letter-spacing: -.04em;
 }
 
 .gallery-main-desc {
   max-width: 600px;
-
   margin-top: 12px;
-
   color: rgba(255,255,255,.72);
-
-  font-size: 14px;
+  font-size: var(--text-body);
 }
 
 .image-caption {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 800;
 }
 
 .image-subcaption {
   margin-top: 5px;
-
   color: #8e9095;
-  font-size: 12px;
+  font-size: var(--text-small);
 }
 
 .gallery-arrow {
@@ -442,9 +414,7 @@ img {
   color: #fff;
 
   font-size: 19px;
-
   backdrop-filter: blur(10px);
-
   transform: translateY(-50%);
 
   transition:
@@ -472,18 +442,14 @@ img {
 
   display: flex;
   gap: 7px;
-
   z-index: 5;
 }
 
 .gallery-dot {
   width: 7px;
   height: 7px;
-
   padding: 0;
-
   border-radius: 50%;
-
   background: rgba(255,255,255,.4);
 
   transition:
@@ -497,22 +463,18 @@ img {
 }
 
 /* =========================================================
-   GALLERY ITEMS
+   СПИСОК ЕЛЕМЕНТІВ ГАЛЕРЕЇ (GALLERY ITEMS)
    ========================================================= */
-
 .gallery-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-
   gap: 12px;
-
   margin-top: 12px;
 }
 
 .gallery-item {
   min-width: 0;
   min-height: 94px;
-
   padding: 12px;
 
   display: flex;
@@ -521,9 +483,7 @@ img {
 
   border: 1px solid transparent;
   border-radius: 16px;
-
   background: var(--paper);
-
   cursor: pointer;
 
   transition:
@@ -546,40 +506,31 @@ img {
 .gallery-item-image {
   width: 68px;
   height: 68px;
-
   flex-shrink: 0;
-
   overflow: hidden;
-
   border-radius: 12px;
-
   background: var(--soft);
 }
 
 .gallery-item-img {
   width: 100%;
   height: 100%;
-
   object-fit: cover;
 }
 
 .gallery-item-placeholder {
   width: 100%;
   height: 100%;
-
   display: grid;
   place-items: center;
-
   color: var(--muted-2);
-
-  font-size: 12px;
+  font-size: var(--text-small);
   font-weight: 900;
 }
 
 .gallery-item-content {
   min-width: 0;
   flex: 1;
-
   display: flex;
   align-items: center;
   gap: 8px;
@@ -587,30 +538,23 @@ img {
 
 .gallery-item-title {
   overflow: hidden;
-
   white-space: nowrap;
   text-overflow: ellipsis;
-
   font-size: 14px;
   font-weight: 900;
 }
 
 .gallery-item-sub {
   margin-top: 3px;
-
   overflow: hidden;
-
   white-space: nowrap;
   text-overflow: ellipsis;
-
   color: var(--muted);
-
-  font-size: 11px;
+  font-size: var(--text-small);
 }
 
 .gallery-item-arrow {
   flex-shrink: 0;
-
   width: 31px;
   height: 31px;
 
@@ -618,12 +562,10 @@ img {
   place-items: center;
 
   border-radius: 50%;
-
   background: #fff;
   color: var(--ink);
 
   font-size: 15px;
-
   transition:
     transform .25s var(--ease),
     background .25s var(--ease);
@@ -637,7 +579,6 @@ img {
 
 .gallery-scroll-hint {
   min-height: 94px;
-
   padding: 15px 17px;
 
   display: flex;
@@ -646,10 +587,8 @@ img {
   gap: 12px;
 
   border-radius: 16px;
-
   background: var(--ink);
   color: #fff;
-
   cursor: pointer;
 
   transition: transform .25s var(--ease);
@@ -661,15 +600,13 @@ img {
 
 .gallery-scroll-title {
   color: #888b92;
-
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 900;
   letter-spacing: .13em;
 }
 
 .gallery-scroll-text {
   margin-top: 4px;
-
   font-size: 14px;
   font-weight: 800;
 }
@@ -677,71 +614,55 @@ img {
 .gallery-scroll-icon {
   width: 42px;
   height: 42px;
-
   flex-shrink: 0;
-
   display: grid;
   place-items: center;
-
   border-radius: 50%;
-
   background: var(--accent);
-
   font-size: 18px;
 }
 
 /* =========================================================
-   ORDER STEPS
+   ЕТАПИ ЗАМОВЛЕННЯ (ORDER STEPS)
    ========================================================= */
-
 .order-steps {
   padding-top: 150px;
 }
 
 .section-label {
   margin: 0;
-
   color: var(--accent);
-
-  font-size: 11px;
+  font-size: var(--text-small);
   font-weight: 900;
   letter-spacing: .16em;
 }
 
+/* Приведений до єдиного стандарту заголовок секцій */
 .section-title {
-  max-width: 700px;
-
-  margin: 15px 0 0;
-
-  font-size: clamp(38px, 5vw, 62px);
-  line-height: .98;
-
+  max-width: 650px;
+  margin: 12px 0 0;
+  font-size: var(--text-title);
+  line-height: 1.1;
   font-weight: 900;
-  letter-spacing: -.055em;
+  letter-spacing: -.04em;
 }
 
 .section-desc {
   max-width: 530px;
-
   margin: 20px 0 0;
-
   color: var(--muted);
-
-  font-size: 16px;
+  font-size: var(--text-body);
 }
 
 .steps {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-
   gap: 12px;
-
   margin-top: 45px;
 }
 
 .step-card {
   min-height: 220px;
-
   padding: 25px;
 
   display: flex;
@@ -749,7 +670,6 @@ img {
   justify-content: space-between;
 
   border-radius: var(--radius-md);
-
   background: #fff;
   border: 1px solid var(--line);
 
@@ -770,7 +690,7 @@ img {
 }
 
 .step-number {
-  font-size: 11px;
+  font-size: var(--text-small);
   font-weight: 900;
   letter-spacing: .12em;
 }
@@ -785,18 +705,15 @@ img {
 
 .step-title {
   margin-top: auto;
-
-  font-size: 25px;
+  font-size: 21px;
   font-weight: 900;
-  letter-spacing: -.03em;
+  letter-spacing: -.02em;
 }
 
 .step-desc {
-  margin-top: 4px;
-
+  margin-top: 6px;
   color: var(--muted);
-
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .step-card.dark .step-desc {
@@ -804,12 +721,10 @@ img {
 }
 
 /* =========================================================
-   CTA
+   БАНЕР ЗАКЛИКУ ДО ДІЇ (CTA BANNER)
    ========================================================= */
-
 .cta-banner {
   position: relative;
-
   min-height: 300px;
 
   margin-top: 150px;
@@ -821,7 +736,6 @@ img {
   gap: 40px;
 
   overflow: hidden;
-
   border-radius: var(--radius-lg);
 
   background: var(--ink);
@@ -830,21 +744,14 @@ img {
 
 .cta-banner::after {
   content: "";
-
   position: absolute;
-
   width: 350px;
   height: 350px;
-
   right: -100px;
   top: -150px;
-
   border-radius: 50%;
-
   background: var(--accent);
-
   opacity: .9;
-
   filter: blur(1px);
 }
 
@@ -856,27 +763,21 @@ img {
 
 .cta-banner-title {
   max-width: 600px;
-
   margin: 0;
-
-  font-size: clamp(34px, 5vw, 58px);
-  line-height: .95;
-
+  font-size: var(--text-title);
+  line-height: 1.1;
   font-weight: 900;
-  letter-spacing: -.055em;
+  letter-spacing: -.04em;
 }
 
 .cta-banner-desc {
   margin-top: 14px;
-
   color: #92959c;
-
-  font-size: 15px;
+  font-size: var(--text-body);
 }
 
 .cta-banner-button {
   min-height: 56px;
-
   padding: 0 25px;
 
   display: inline-flex;
@@ -884,7 +785,6 @@ img {
   gap: 12px;
 
   flex-shrink: 0;
-
   border-radius: 999px;
 
   background: #fff;
@@ -909,66 +809,53 @@ img {
 }
 
 /* =========================================================
-   ORDER FORM
+   ФОРМА ЗАМОВЛЕННЯ (ORDER FORM)
    ========================================================= */
-
 .order-form-section {
   scroll-margin-top: 110px;
-
   margin-top: 100px;
 }
 
 .order-form {
   display: grid;
   grid-template-columns: .8fr 1.2fr;
-
   overflow: hidden;
-
   border-radius: var(--radius-lg);
-
   background: #fff;
   border: 1px solid var(--line);
-
   box-shadow: 0 25px 70px rgba(17,18,22,.07);
 }
 
 .order-form-info {
   padding: 52px 42px;
-
   background: var(--ink);
   color: #fff;
 }
 
 .order-form-label {
   color: #a9b5ff;
-
-  font-size: 10px;
+  font-size: var(--text-small);
   font-weight: 900;
   letter-spacing: .15em;
 }
 
 .order-form-title {
   margin: 18px 0 0;
-
-  font-size: clamp(32px, 4vw, 49px);
-  line-height: .98;
-
+  font-size: var(--text-title);
+  line-height: 1.1;
   font-weight: 900;
-  letter-spacing: -.055em;
+  letter-spacing: -.04em;
 }
 
 .order-form-description {
   margin-top: 20px;
-
   color: #989ba2;
-
-  font-size: 14px;
+  font-size: var(--text-body);
   line-height: 1.65;
 }
 
 .order-form-benefits {
   margin-top: 50px;
-
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -982,42 +869,31 @@ img {
 .order-benefit-icon {
   width: 31px;
   height: 31px;
-
   flex-shrink: 0;
-
   display: grid;
   place-items: center;
-
   border-radius: 50%;
-
   background: var(--accent);
-
   color: #fff;
-
-  font-size: 11px;
+  font-size: var(--text-small);
   font-weight: 900;
 }
 
 .order-benefit strong {
   display: block;
-
   font-size: 12px;
   font-weight: 900;
 }
 
 .order-benefit span {
   display: block;
-
   margin-top: 3px;
-
   color: #777a82;
-
-  font-size: 11px;
+  font-size: var(--text-small);
 }
 
 .order-form-fields {
   padding: 48px;
-
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -1036,7 +912,7 @@ img {
 }
 
 .order-field label {
-  font-size: 11px;
+  font-size: var(--text-small);
   font-weight: 900;
 }
 
@@ -1050,15 +926,11 @@ img {
 .order-field input[type="tel"],
 .order-field textarea {
   width: 100%;
-
   border: 1px solid var(--line);
   border-radius: 12px;
-
   outline: none;
-
   background: var(--paper);
   color: var(--ink);
-
   transition:
     border-color .2s,
     background .2s,
@@ -1074,9 +946,7 @@ img {
 
 .order-field textarea {
   min-height: 130px;
-
   padding: 13px 14px;
-
   resize: vertical;
 }
 
@@ -1084,7 +954,6 @@ img {
 .order-field textarea:focus {
   border-color: var(--accent);
   background: #fff;
-
   box-shadow: 0 0 0 4px rgba(66,103,255,.08);
 }
 
@@ -1095,7 +964,6 @@ img {
 
 .order-upload {
   min-height: 72px;
-
   padding: 12px;
 
   display: flex;
@@ -1104,9 +972,7 @@ img {
 
   border: 1px dashed #cfd0cb;
   border-radius: 12px;
-
   background: var(--paper);
-
   cursor: pointer;
 
   transition:
@@ -1121,50 +987,38 @@ img {
 
 .order-upload input {
   position: absolute;
-
   width: 1px;
   height: 1px;
-
   opacity: 0;
 }
 
 .order-upload-icon {
   width: 38px;
   height: 38px;
-
   flex-shrink: 0;
-
   display: grid;
   place-items: center;
-
   border-radius: 50%;
-
   background: var(--accent-soft);
   color: var(--accent);
-
   font-weight: 900;
 }
 
 .order-upload-text strong {
   display: block;
-
   font-size: 12px;
   font-weight: 900;
 }
 
 .order-upload-text span {
   display: block;
-
   margin-top: 2px;
-
   color: var(--muted);
-
-  font-size: 10px;
+  font-size: var(--text-small);
 }
 
 .order-form-bottom {
   margin-top: auto;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1175,12 +1029,9 @@ img {
   display: flex;
   align-items: flex-start;
   gap: 8px;
-
   max-width: 310px;
-
   color: var(--muted);
-
-  font-size: 10px;
+  font-size: var(--text-small);
   line-height: 1.4;
 }
 
@@ -1191,7 +1042,6 @@ img {
 
 .order-submit {
   min-height: 50px;
-
   padding: 0 7px 0 20px;
 
   display: inline-flex;
@@ -1199,13 +1049,12 @@ img {
   gap: 12px;
 
   flex-shrink: 0;
-
   border-radius: 999px;
 
   background: var(--ink);
   color: #fff;
 
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 900;
 
   transition:
@@ -1216,14 +1065,10 @@ img {
 .order-submit span {
   width: 34px;
   height: 34px;
-
   display: grid;
   place-items: center;
-
   border-radius: 50%;
-
   background: var(--accent);
-
   font-size: 16px;
 }
 
@@ -1238,14 +1083,11 @@ img {
 }
 
 /* =========================================================
-   SUCCESS
+   БЛОК УСПІШНОГО ВІДПРАВЛЕННЯ (SUCCESS STATE)
    ========================================================= */
-
 .order-success {
   min-height: 650px;
-
   padding: 60px;
-
   display: flex;
   align-items: center;
   gap: 22px;
@@ -1254,87 +1096,67 @@ img {
 .order-success-icon {
   width: 64px;
   height: 64px;
-
   flex-shrink: 0;
-
   display: grid;
   place-items: center;
-
   border-radius: 50%;
-
   background: var(--accent);
   color: #fff;
-
   font-size: 24px;
   font-weight: 900;
 }
 
 .order-success-label {
   color: var(--accent);
-
-  font-size: 10px;
+  font-size: var(--text-small);
   font-weight: 900;
   letter-spacing: .12em;
 }
 
 .order-success h3 {
   margin: 10px 0 0;
-
-  font-size: 38px;
-  line-height: 1;
-
+  font-size: var(--text-title);
+  line-height: 1.1;
   font-weight: 900;
   letter-spacing: -.04em;
 }
 
 .order-success p {
   max-width: 540px;
-
   margin-top: 15px;
-
   color: var(--muted);
-
-  font-size: 14px;
+  font-size: var(--text-body);
   line-height: 1.65;
 }
 
 .order-success-note {
   padding: 13px 15px;
-
   border-left: 3px solid var(--accent);
-
   background: var(--paper);
-
   color: var(--ink) !important;
-
   font-size: 12px !important;
   font-weight: 800;
 }
 
 /* =========================================================
-   TIETOA
+   БЛОК «ПРО НАС / ІНФОРМАЦІЯ» (TIETOA SECTION)
    ========================================================= */
-
 .tietoa {
   margin-top: 150px;
   padding: 110px 0 125px;
-
   border-top: 1px solid var(--line);
 }
 
 .tietoa__inner {
   display: grid;
   grid-template-columns: 190px minmax(0, 1fr);
-
   gap: 60px;
 }
 
 .tietoa__label {
   padding-top: 10px;
-
   color: var(--accent);
-
-  font-size: 11px;
+  font-size: var(--text-small);
   font-weight: 900;
   letter-spacing: .17em;
 }
@@ -1343,27 +1165,23 @@ img {
   min-width: 0;
 }
 
+/* Приведений до єдиного стандарту заголовок «Tietoa» */
 .tietoa__content h2 {
-  max-width: 800px;
-
-  margin: 0 0 50px;
-
-  font-size: clamp(45px, 6vw, 76px);
-  line-height: .91;
-
+  max-width: 750px;
+  margin: 0 0 35px;
+  font-size: var(--text-title);
+  line-height: 1.1;
   font-weight: 900;
-  letter-spacing: -.065em;
+  letter-spacing: -.045em;
 }
 
+/* Рівні інтервали між абзацами без проплешин */
 .tietoa__content p {
   max-width: 680px;
-
-  margin: 0 0 22px;
-
+  margin: 0 0 14px;
   color: var(--muted);
-
-  font-size: 16px;
-  line-height: 1.75;
+  font-size: var(--text-body);
+  line-height: 1.65;
 }
 
 .tietoa__content strong {
@@ -1373,43 +1191,36 @@ img {
 
 .tietoa__cta {
   max-width: 680px;
-
   margin-top: 55px;
   padding-top: 28px;
-
   display: flex;
   flex-direction: column;
   gap: 4px;
-
   border-top: 1px solid var(--line);
 }
 
 .tietoa__cta strong {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 900;
 }
 
 .tietoa__cta span {
   color: var(--muted);
-
-  font-size: 14px;
+  font-size: var(--text-body);
 }
 
 /* =========================================================
-   FOOTER
+   ФУТЕР САЙТУ (FOOTER)
    ========================================================= */
-
 .footer {
   margin-top: 0;
   padding: 80px 0 45px;
-
   border-top: 1px solid var(--line);
 }
 
 .footer-top {
   display: grid;
   grid-template-columns: 1fr 380px;
-
   gap: 50px;
 }
 
@@ -1419,42 +1230,32 @@ img {
 
 .footer-title {
   max-width: 650px;
-
   margin: 10px 0 0;
-
-  font-size: clamp(38px, 5vw, 60px);
-  line-height: .95;
-
+  font-size: var(--text-title);
+  line-height: 1.1;
   font-weight: 900;
-  letter-spacing: -.055em;
+  letter-spacing: -.04em;
 }
 
 .footer-desc {
   max-width: 550px;
-
   margin-top: 18px;
-
   color: var(--muted);
-
-  font-size: 14px;
+  font-size: var(--text-body);
 }
 
 .process-steps {
   margin-top: 42px;
   padding: 25px;
-
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
-
   background: #fff;
 }
 
 .process-step {
   position: relative;
-
   display: flex;
   gap: 16px;
-
   padding-bottom: 28px;
 }
 
@@ -1465,17 +1266,12 @@ img {
 .process-step-circle {
   width: 48px;
   height: 48px;
-
   flex-shrink: 0;
-
   display: grid;
   place-items: center;
-
   border-radius: 50%;
-
   background: var(--paper);
-
-  font-size: 12px;
+  font-size: var(--text-small);
   font-weight: 900;
 }
 
@@ -1486,37 +1282,29 @@ img {
 
 .process-step-line {
   position: absolute;
-
   left: 24px;
   top: 48px;
-
   width: 1px;
   height: 35px;
-
   background: var(--line);
 }
 
 .process-step-title {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 900;
 }
 
 .process-step-desc {
   max-width: 450px;
-
   margin-top: 4px;
-
   color: var(--muted);
-
-  font-size: 12px;
+  font-size: var(--text-small);
   line-height: 1.5;
 }
 
 .company-block {
   padding: 28px;
-
   border-radius: var(--radius-md);
-
   background: var(--ink);
   color: #fff;
 }
@@ -1524,32 +1312,26 @@ img {
 .footer-label-light,
 .info-label {
   color: #777a82;
-
-  font-size: 10px;
+  font-size: var(--text-small);
   font-weight: 800;
 }
 
 .company-name {
   margin-top: 8px;
-
-  font-size: 27px;
+  font-size: 24px;
   font-weight: 900;
   letter-spacing: -.03em;
 }
 
 .company-sub {
   margin-top: 3px;
-
   color: #858890;
-
-  font-size: 12px;
+  font-size: var(--text-small);
 }
 
 .company-divider {
   height: 1px;
-
   margin: 23px 0;
-
   background: #2d2f34;
 }
 
@@ -1559,24 +1341,19 @@ img {
 
 .info-text {
   margin-top: 3px;
-
   color: #fff;
-
   font-size: 13px;
 }
 
 .footer-links {
   margin-top: 65px;
-
   color: var(--muted-2);
-
-  font-size: 11px;
+  font-size: var(--text-small);
 }
 
 /* =========================================================
-   TABLET
+   АДАПТИВНІСТЬ ДЛЯ ПЛАНШЕТІВ (TABLET STYLES)
    ========================================================= */
-
 @media (max-width: 900px) {
   .page {
     width: min(calc(100% - 24px), 720px);
@@ -1584,7 +1361,6 @@ img {
 
   .header {
     grid-template-columns: 1fr auto;
-
     padding-left: 18px;
   }
 
@@ -1596,12 +1372,8 @@ img {
     padding-top: 75px;
   }
 
-  .hero-title {
-    font-size: clamp(58px, 12vw, 92px);
-  }
-
   .hero-desc {
-    margin-left: 25%;
+    margin-left: 0;
   }
 
   .gallery-main-image {
@@ -1641,19 +1413,14 @@ img {
     gap: 25px;
   }
 
-  .tietoa__content h2 {
-    max-width: 700px;
-  }
-
   .footer-top {
     grid-template-columns: 1fr;
   }
 }
 
 /* =========================================================
-   MOBILE
+   АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ ПРИСТРОЇВ (MOBILE STYLES)
    ========================================================= */
-
 @media (max-width: 600px) {
   :root {
     --radius-md: 18px;
@@ -1667,11 +1434,8 @@ img {
   .header {
     position: sticky;
     top: 10px;
-
     height: 62px;
-
     margin-top: 10px;
-
     padding: 7px 8px 7px 15px;
   }
 
@@ -1681,9 +1445,7 @@ img {
 
   .cta-button {
     min-height: 44px;
-
     padding-left: 14px;
-
     font-size: 10px;
   }
 
@@ -1698,31 +1460,21 @@ img {
 
   .hero-label {
     margin-bottom: 18px;
-
-    font-size: 9px;
-  }
-
-  .hero-title {
-    font-size: clamp(48px, 15vw, 72px);
-    letter-spacing: -.07em;
   }
 
   .hero-desc {
-    margin: 25px 0 0 8%;
-
+    margin: 20px 0 0 0;
     font-size: 14px;
   }
 
   .gallery-placeholder {
     margin-top: 40px;
     padding: 7px;
-
     border-radius: 19px;
   }
 
   .gallery-main-image {
     height: 420px;
-
     border-radius: 14px;
   }
 
@@ -1731,7 +1483,7 @@ img {
   }
 
   .gallery-main-title {
-    font-size: 29px;
+    font-size: 26px;
   }
 
   .gallery-main-desc {
@@ -1773,24 +1525,14 @@ img {
     padding-top: 95px;
   }
 
-  .section-title {
-    font-size: 40px;
-  }
-
-  .section-desc {
-    font-size: 14px;
-  }
-
   .step-card {
     min-height: 145px;
   }
 
   .cta-banner {
     min-height: 370px;
-
     margin-top: 95px;
     padding: 27px;
-
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-end;
@@ -1799,13 +1541,8 @@ img {
   .cta-banner::after {
     width: 240px;
     height: 240px;
-
     right: -110px;
     top: -90px;
-  }
-
-  .cta-banner-title {
-    font-size: 40px;
   }
 
   .cta-banner-button {
@@ -1818,14 +1555,6 @@ img {
 
   .order-form-info {
     padding: 32px 25px;
-  }
-
-  .order-form-title {
-    font-size: 35px;
-  }
-
-  .order-form-benefits {
-    margin-top: 35px;
   }
 
   .order-form-fields {
@@ -1851,26 +1580,14 @@ img {
 
   .order-success {
     min-height: 430px;
-
     padding: 35px 25px;
-
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  .order-success h3 {
-    font-size: 32px;
   }
 
   .tietoa {
     margin-top: 95px;
     padding: 75px 0 85px;
-  }
-
-  .tietoa__content h2 {
-    margin-bottom: 35px;
-
-    font-size: 47px;
   }
 
   .tietoa__content p {
@@ -1884,10 +1601,6 @@ img {
 
   .footer {
     padding-top: 65px;
-  }
-
-  .footer-title {
-    font-size: 40px;
   }
 
   .process-steps {
@@ -1905,7 +1618,6 @@ img {
   .back-to-top {
     right: 14px;
     bottom: 14px;
-
     width: 44px;
     height: 44px;
   }
