@@ -93,21 +93,39 @@ export default function LandingPage() {
 
           <div className="editorial-grid">
             {posts.length > 0 ? (
-              posts.map((post, idx) => (
-                <div key={post.id || idx} className="editorial-card" onClick={openOrderForm}>
-                  <div className="editorial-card-img-wrap">
-                    {post.imageUrl ? (
-                      <img src={post.imageUrl} alt={post.title || "Veistos"} className="editorial-card-img" />
-                    ) : (
-                      <div className="editorial-card-placeholder">KUVA</div>
-                    )}
+              posts.map((post, idx) => {
+                const uniqueId = `film-${post.id || idx}`; // Створюємо унікальний ID для кожної картки
+
+                return (
+                  <div key={post.id || idx} className="editorial-card">
+                    {/* Прихований перемикач для CSS-кліку */}
+                    <input type="checkbox" id={uniqueId} className="film-trigger" />
+
+                    <div className="editorial-card-img-wrap">
+                      {post.imageUrl ? (
+                        <img src={post.imageUrl} alt={post.title || "Veistos"} className="editorial-card-img" />
+                      ) : (
+                        <div className="editorial-card-placeholder">KUVA</div>
+                      )}
+                      
+                      {/* Справжня стрілочка для кліку */}
+                      <label htmlFor={uniqueId} className="film-arrow" onClick={(e) => e.stopPropagation()}>→</label>
+                    </div>
+
+                    {/* Плівка з додатковими фото (виїде вправо) */}
+                    <div className="filmstrip">
+                      {/* Тут поки що заглушки. Пізніше сюди можна передавати масив додаткових фото з бекенду (post.galleryImages) */}
+                      <img src={post.imageUrl || "/photo1_2.jpg"} alt="Ракурс 2" />
+                      <img src={post.imageUrl || "/photo1_3.jpg"} alt="Ракурс 3" />
+                    </div>
+
+                    <div className="editorial-card-footer" onClick={openOrderForm}>
+                      <span className="card-title">{post.title || `Veistos ${String(idx + 1).padStart(2, "0")}`}</span>
+                      <span className="card-tag">Tilaa →</span>
+                    </div>
                   </div>
-                  <div className="editorial-card-footer">
-                    <span className="card-title">{post.title || `Veistos ${String(idx + 1).padStart(2, "0")}`}</span>
-                    <span className="card-tag">Tilaa →</span>
-                  </div>
-                </div>
-              ))
+                );
+              })
             ) : (
               <div className="editorial-card">
                 <div className="editorial-card-img-wrap"><div className="editorial-card-placeholder">Ladataan...</div></div>
