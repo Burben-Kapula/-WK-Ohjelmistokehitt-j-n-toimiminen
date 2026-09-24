@@ -86,10 +86,10 @@ export default function LandingPage() {
 
       <main className="main">
         <section className="hero">
-          <div className="hero-label">VEISTOKSIA KOTIIN.</div>
-          <h1 className="hero-title">VEISTOKSIA KOTIIN.</h1>
+          <div className="hero-label">KÄSINVALMISTETUT BETONIVEISTOKSET</div>
+          <h1 className="hero-title">VEISTOKSIA KOTIIN JA PIHAAN.</h1>
           <p className="hero-desc">
-            Eläinveistoksia käsin tehtynä.<br />Helppo tapa tilata oma veistos.
+            Uniikkeja eläinveistoksia suoraan tekijältä.<br />Tilaa vaivattomasti omien toiveidesi mukaan.
           </p>
 
           <div className="gallery-placeholder">
@@ -150,8 +150,8 @@ export default function LandingPage() {
               )}
               <div className="gallery-scroll-hint" onClick={() => scrollTo(targetRef)}>
                 <div>
-                  <div className="gallery-scroll-title">GALLERIAN SELAUS</div>
-                  <div className="gallery-scroll-text">Vieritä lisää töitä</div>
+                  <div className="gallery-scroll-title">TIETOA MEISTÄ</div>
+                  <div className="gallery-scroll-text">Lue lisää töistä</div>
                 </div>
                 <div className="gallery-scroll-icon">↓</div>
               </div>
@@ -159,7 +159,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-<section className="order-steps">
+        <section className="order-steps">
           <h2 className="section-label">TILAAMINEN</h2>
           <h3 className="section-title">Näin tilaaminen toimii.</h3>
           <p className="section-desc">Ei monimutkaisia verkkokauppoja – suoraan ja vaivattomasti.</p>
@@ -173,7 +173,7 @@ export default function LandingPage() {
             <StepCard 
               number="02" 
               title="Vahvistus" 
-              desc="Katsotaan tiedot läpi ja otamme sinuun yhteyttä 2 arkipäivän kuluessa." 
+              desc="Katsotaan tiedot läpi ja otamme sinuun yhteyttä kahden arkipäivän kuluessa." 
               variant="light" 
             />
             <StepCard 
@@ -188,7 +188,7 @@ export default function LandingPage() {
         <section className="cta-banner">
           <div className="cta-banner-text">
             <h3 className="cta-banner-title">Haluatko oman veistoksen?</h3>
-            <p className="cta-banner-desc">Lähetä tilaus ja olemme yhteydessä.</p>
+            <p className="cta-banner-desc">Jätä tilauslomake, niin keskustellaan toiveistasi.</p>
           </div>
           <button className="cta-banner-button" onClick={openOrderForm}>TEE TILAUS<span>→</span></button>
         </section>
@@ -203,15 +203,15 @@ export default function LandingPage() {
                 <div className="order-form-benefits">
                   <div className="order-benefit">
                     <div className="order-benefit-icon">✓</div>
-                    <div><strong>Turvallinen ja luottamuksellinen</strong><span>tietosi ovat turvassa</span></div>
+                    <div><strong>Turvallinen asiointi</strong><span>tietosi käsitellään luottamuksellisesti</span></div>
                   </div>
                   <div className="order-benefit">
                     <div className="order-benefit-icon">2</div>
-                    <div><strong>Vastaus 2 arkipäivän kuluessa</strong><span>käsittelemme jokaisen tilauksen</span></div>
+                    <div><strong>Nopea vastaus</strong><span>otamme yhteyttä 2 arkipäivän kuluessa</span></div>
                   </div>
                   <div className="order-benefit">
                     <div className="order-benefit-icon">✓</div>
-                    <div><strong>Ei sitoumuksia</strong><span>kartoitamme ensin toiveesi</span></div>
+                    <div><strong>Ei sitoumuksia</strong><span>kartoitamme ensin toiveesi rauhassa</span></div>
                   </div>
                 </div>
               </div>
@@ -241,11 +241,11 @@ export default function LandingPage() {
                     <textarea id="description" name="description" rows="6" placeholder="Kerro esimerkiksi eläimestä, koosta, materiaalista, tyylistä, väristä tai muista toiveistasi..." required />
                   </div>
                   <div className="order-field">
-                    <label htmlFor="files">Kuvat tai suunnitelmat <span className="optional">valinnainen</span></label>
+                    <label htmlFor="files">Kuvat tai viitteet <span className="optional">valinnainen</span></label>
                     <label htmlFor="files" className="order-upload">
                       <div className="order-upload-icon">↑</div>
                       <div className="order-upload-text">
-                        <strong>Lisää kuvia tai suunnitelmia</strong>
+                        <strong>Lisää kuvia tai luonnoksia</strong>
                         <span>PNG, JPG tai PDF · max. 10 MB</span>
                       </div>
                       <input id="files" name="files" type="file" accept=".png,.jpg,.jpeg,.pdf" multiple />
@@ -272,7 +272,7 @@ export default function LandingPage() {
                   <div>
                     <div className="order-success-label">TILAUS VASTAANOTETTU</div>
                     <h3>Kiitos tilauksestasi!</h3>
-                    <p>Tilauksesi on vastaanotettu ja välitetään sähköpostiimme käsiteltäväksi. Tarkistamme toiveesi ja otamme sinuun yhteyttä 2 arkipäivän kuluessa.</p>
+                    <p>Tilauksesi on vastaanotettu onnistuneesti. Tarkistamme toiveesi ja otamme sinuun yhteyttä kahden arkipäivän kuluessa.</p>
                   </div>
                 </div>
               )}
@@ -285,13 +285,12 @@ export default function LandingPage() {
             <div className="tietoa__label">TIETOA</div>
             <div className="tietoa__content">
               <h2>Käsin tehty veistos, joka kestää aikaa.</h2>
-              <p>Jokainen veistos valmistetaan käsityönä Suomessa. Veistoksen perustana on kestävä metallirunko, jonka ympärille veistos rakennetaan betonista. Muoto, yksityiskohdat ja viimeistely tehdään käsin, joten jokainen veistos on oma yksilönsä.</p>
-              <p>Betoni tekee veistoksesta vahvan ja sopivan myös ulkokäyttöön. Oikein valmistettuna ja sijoitettuna veistos kestää Suomen vaihtelevia sääolosuhteita ja säilyy kauniina pitkään.</p>
-              <p>Galleria esittelee esimerkkejä valmiista veistoksista ja näyttää, millaisia töitä voidaan toteuttaa. Oman veistoksen voi suunnitella yhdessä tekijän kanssa – eläimen, koon ja yksityiskohtien lisäksi myös <strong>värin voi valita</strong>.</p>
-              <p>Kaikki veistokset suunnitellaan ja valmistetaan <strong>Suomessa.</strong></p>
+              <p>Jokainen veistos valmistetaan huolellisena käsityönä Suomessa. Teoksen ytimenä toimii tukeva metallirunko, jonka ympärille veistos rakennetaan säänkestävästä betonista. Muotoilu, yksityiskohdat ja viimeistely tehdään täysin käsin, mikä tekee jokaisesta teoksesta ainutlaatuisen yksilön.</p>
+              <p>Betoni materiaalina tekee veistoksesta erittäin vahvan ja soveltuvan erinomaisesti myös ulkokäyttöön. Oikein sijoitettuna veistos kestää vaihtelevia sääolosuhteita ja säilyy kauniina vuosikymmenestä toiseen.</p>
+              <p>Oman veistoksen voi suunnitella yhdessä tekijän kanssa – haluamasi eläimen, koon ja yksityiskohtien lisäksi teokselle voi valita myös haluamasi värityksen.</p>
               <div className="tietoa__cta">
-                <strong>Oma idea mielessä?</strong>
-                <span>Kerro meille toiveesi, niin suunnitellaan siitä oma veistos.</span>
+                <strong>Onko mielessäsi erityinen idea?</strong>
+                <span>Ota yhteyttä, niin suunnitellaan toiveidesi mukainen veistos.</span>
               </div>
             </div>
           </div>
