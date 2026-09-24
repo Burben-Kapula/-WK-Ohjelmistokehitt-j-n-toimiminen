@@ -72,7 +72,7 @@ export default function LandingPage() {
       </header>
 
       <main className="main">
-        {/* Главный экран (Hero) с тонким акцентом */}
+        {/* Главный экран (Hero) с параллаксом */}
         <section className="hero">
           <div className="hero-top-info">
             <span>KÄSINVALMISTETUT BETONIVEISTOKSET</span>
@@ -84,7 +84,7 @@ export default function LandingPage() {
           </p>
         </section>
 
-        {/* Сетка галереи в стиле карточек со спикеров из примера */}
+        {/* Сетка галереи */}
         <section className="editorial-gallery">
           <div className="section-header-line">
             <h2>Kokoelma / Teokset</h2>
@@ -94,11 +94,10 @@ export default function LandingPage() {
           <div className="editorial-grid">
             {posts.length > 0 ? (
               posts.map((post, idx) => {
-                const uniqueId = `film-${post.id || idx}`; // Створюємо унікальний ID для кожної картки
+                const uniqueId = `film-${post.id || idx}`; 
 
                 return (
                   <div key={post.id || idx} className="editorial-card">
-                    {/* Прихований перемикач для CSS-кліку */}
                     <input type="checkbox" id={uniqueId} className="film-trigger" />
 
                     <div className="editorial-card-img-wrap">
@@ -108,13 +107,10 @@ export default function LandingPage() {
                         <div className="editorial-card-placeholder">KUVA</div>
                       )}
                       
-                      {/* Справжня стрілочка для кліку */}
                       <label htmlFor={uniqueId} className="film-arrow" onClick={(e) => e.stopPropagation()}>→</label>
                     </div>
 
-                    {/* Плівка з додатковими фото (виїде вправо) */}
                     <div className="filmstrip">
-                      {/* Тут поки що заглушки. Пізніше сюди можна передавати масив додаткових фото з бекенду (post.galleryImages) */}
                       <img src={post.imageUrl || "/photo1_2.jpg"} alt="Ракурс 2" />
                       <img src={post.imageUrl || "/photo1_3.jpg"} alt="Ракурс 3" />
                     </div>
@@ -182,6 +178,32 @@ export default function LandingPage() {
           </section>
         )}
       </main>
+
+      {/* ====== НОВЫЙ ПРОФЕССИОНАЛЬНЫЙ ПОДВАЛ ====== */}
+      <footer className="footer">
+        <div className="footer-top">
+          <div className="footer-brand">
+            <h2>k.Betoniveistokset</h2>
+            <p>Käsintehty Suomessa. Kestää aikaa.</p>
+          </div>
+          <div className="footer-links">
+            <div className="footer-col">
+              <h4>Yhteystiedot</h4>
+              <a href="mailto:info@betoniveistokset.fi">info@betoniveistokset.fi</a>
+              <a href="#">+358 40 123 4567</a>
+            </div>
+            <div className="footer-col">
+              <h4>Seuraa meitä</h4>
+              <a href="#">Instagram</a>
+              <a href="#">Facebook</a>
+            </div>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <span>© 2026 k.Betoniveistokset. Kaikki oikeudet pidätetään.</span>
+          <span>Suunniteltu Suomessa</span>
+        </div>
+      </footer>
     </div>
   );
 }
