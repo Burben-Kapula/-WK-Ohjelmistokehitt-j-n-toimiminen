@@ -201,7 +201,7 @@ export default function AdminPanel() {
                 onChange={handleChange}
                 required={!editingId}
               />
-              <p className="ap-hint">JPG, PNG tai WebP · max. 10 MB</p>
+              <p className="ap-hint">JPG, PNG tai WebP · enintään 5 Mt</p>
             </div>
 
             <div className="ap-form-actions">

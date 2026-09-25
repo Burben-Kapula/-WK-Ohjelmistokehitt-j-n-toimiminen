@@ -1,23 +1,32 @@
-import { z } from "zod"; // Бібліотека опису схем даних та їх валідації
+import { z } from "zod";
 
 /**
- * Схема валідації створення публікації (POST /api/posts).
- * Заголовок: 3–100 символів, опис: 10–2000 символів.
+ * Teoksen luonnin tarkistus (POST /api/posts).
+ * Nimi: 3–100 merkkiä, kuvaus: 10–2000 merkkiä.
  */
 export const createPostSchema = z.object({
   body: z.object({
-    title: z.string().min(3).max(100),
-    description: z.string().min(10).max(2000),
+    title: z.string()
+      .min(3, "Nimessä on oltava vähintään 3 merkkiä.")
+      .max(100, "Nimessä saa olla enintään 100 merkkiä."),
+    description: z.string()
+      .min(10, "Kuvauksessa on oltava vähintään 10 merkkiä.")
+      .max(2000, "Kuvauksessa saa olla enintään 2000 merkkiä."),
   }),
 });
 
 /**
- * Схема валідації редагування публікації (PUT /api/posts/:id).
- * Поля необов'язкові — можна змінити лише те, що передали.
+ * Teoksen muokkaamisen tarkistus (PUT /api/posts/:id).
  */
 export const updatePostSchema = z.object({
   body: z.object({
-    title: z.string().min(3).max(100).optional(),
-    description: z.string().min(10).max(2000).optional(),
+    title: z.string()
+      .min(3, "Nimessä on oltava vähintään 3 merkkiä.")
+      .max(100, "Nimessä saa olla enintään 100 merkkiä.")
+      .optional(),
+    description: z.string()
+      .min(10, "Kuvauksessa on oltava vähintään 10 merkkiä.")
+      .max(2000, "Kuvauksessa saa olla enintään 2000 merkkiä.")
+      .optional(),
   }),
 });

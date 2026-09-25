@@ -1,12 +1,12 @@
-import { z } from "zod"; // Бібліотека опису схем даних та їх валідації
+import { z } from "zod";
 
 /**
  * Схема валідації входу адміна (POST /api/auth/login).
- * Email має бути коректним, пароль — не порожнім рядком.
+ * Повідомлення про помилки повертаються клієнту suomeksi.
  */
 export const loginSchema = z.object({
   body: z.object({
-    email: z.string().email(),
-    password: z.string().min(1),
+    email: z.string().email("Anna kelvollinen sähköpostiosoite."),
+    password: z.string().min(1, "Anna salasana."),
   }),
 });

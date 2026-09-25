@@ -33,7 +33,7 @@ export const listPosts = async (req, res) => {
 export const createPost = async (req, res) => {
   const { title, description } = req.body;
   const file = req.file; // Завантажений файл (оброблений multer)
-  if (!file) return res.status(400).json({ error: "Image is required" }); // Без картинки публікацію не створюємо
+  if (!file) return res.status(400).json({ error: "Kuva on pakollinen" }); // Без картинки публікацію не створюємо
 
   const newPost = {
     id: uuidv4(),
@@ -62,7 +62,7 @@ export const updatePost = async (req, res) => {
 
   const posts = await readPosts();
   const idx = posts.findIndex((p) => p.id === id);
-  if (idx === -1) return res.status(404).json({ error: "Post not found" }); // Немає такої публікації
+  if (idx === -1) return res.status(404).json({ error: "Veistosta ei löytynyt" }); // Немає такої публікації
 
   const post = posts[idx];
   // Залишаємо старі значення, якщо нові не передані
@@ -92,7 +92,7 @@ export const deletePost = async (req, res) => {
 
   const posts = await readPosts();
   const idx = posts.findIndex((p) => p.id === id);
-  if (idx === -1) return res.status(404).json({ error: "Post not found" });
+  if (idx === -1) return res.status(404).json({ error: "Veistosta ei löytynyt" });
 
   const [removed] = posts.splice(idx, 1); // Виймаємо публікацію з масиву
   await writePosts(posts);

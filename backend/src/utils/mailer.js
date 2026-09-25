@@ -60,10 +60,10 @@ export async function sendOrderEmail({ subject, fields, replyTo, attachments } =
 
   const html = `
     <div style="font-family:Arial,Helvetica,sans-serif;color:#222;max-width:640px;">
-      <h2 style="margin:0 0 4px;">Uusi tilaus / New order</h2>
-      <p style="color:#666;margin:0 0 16px;">K.Betoniveistokset — verkkolomake</p>
+      <h2 style="margin:0 0 4px;">Uusi tilaus</h2>
+      <p style="color:#666;margin:0 0 16px;">K.Betoniveistokset – verkkotilauslomake</p>
       <table style="border-collapse:collapse;width:100%;font-size:14px;">${rows}</table>
-      <p style="color:#999;font-size:12px;margin-top:16px;">Lähetetty automaattisesti lomakkeesta.</p>
+      <p style="color:#999;font-size:12px;margin-top:16px;">Lähetetty automaattisesti tilauslomakkeesta.</p>
     </div>`;
 
   const payload = {

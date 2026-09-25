@@ -12,7 +12,7 @@ export const errorHandler = (err, req, res, next) => {
     return res.status(400).json({ error: err.message });
   }
   if (err.message === "Unsupported file type") {
-    return res.status(400).json({ error: "Only JPEG, PNG, WebP images are allowed" });
+    return res.status(400).json({ error: "Sallitut kuvatyypit ovat JPEG, PNG ja WebP" });
   }
-  res.status(500).json({ error: "Internal server error" });
+  res.status(500).json({ error: "Palvelimen sisäinen virhe" });
 };

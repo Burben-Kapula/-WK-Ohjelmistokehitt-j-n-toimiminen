@@ -515,3 +515,86 @@
   justify-content: center;
   gap: 6px;
 }
+
+/* ── Kirjautumisnäkymän puuttuvat perustyylit ── */
+.vista-logon-card { text-align: center; }
+.vista-user-avatar {
+  width: 84px;
+  height: 84px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, #eef2ff, #e0e7ff);
+  border: 1px solid #c7d2fe;
+  font-size: 42px;
+}
+.vista-logon-name {
+  margin: 0 0 4px;
+  font-size: 26px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #111827;
+}
+.vista-form { display: flex; flex-direction: column; gap: 18px; margin-top: 24px; }
+.vista-label { display: block; margin-bottom: 7px; font-size: 13px; font-weight: 600; color: #374151; }
+.vista-btn {
+  border: none;
+  border-radius: 7px;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.vista-btn-primary { background: #4f46e5; color: #ffffff; }
+.vista-btn-primary:hover:not(:disabled) { background: #4338ca; }
+.vista-btn:disabled { opacity: .6; cursor: wait; }
+
+/* ── Ylläpidon näkymien mobiiliversio ── */
+@media (max-width: 768px) {
+  .ap-header {
+    height: auto;
+    min-height: 64px;
+    padding: 10px 14px;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .ap-header-left { min-width: 0; }
+  .ap-header-title { font-size: 15px; }
+  .ap-header-actions { margin-left: auto; gap: 8px; }
+  .ap-header-link { font-size: 13px; }
+  .ap-header-actions .ap-btn { min-height: 40px; padding: 9px 12px; }
+  .ap-main { padding: 18px 12px 44px; gap: 18px; }
+  .ap-card { padding: 20px 16px 24px; border-radius: 12px; }
+  .ap-card-head { gap: 12px; align-items: flex-start; }
+  .ap-card-title { font-size: 17px; }
+  .ap-alert { align-items: flex-start; padding: 12px 14px; }
+  .ap-input, .ap-textarea, .vista-input { font-size: 16px; }
+  .ap-grid { grid-template-columns: 1fr; }
+  .ap-post-actions { flex-direction: column; }
+  .ap-post-actions .ap-btn { width: 100%; min-height: 42px; }
+
+  .vista-layout { align-items: flex-start; padding: 16px 12px; }
+  .vista-window { border-radius: 13px; }
+  .vista-titlebar { padding: 14px 16px; }
+  .vista-title-left { gap: 8px; min-width: 0; }
+  .vista-title-text { font-size: 13px; line-height: 1.25; }
+  .vista-body { padding: 24px 20px 28px; }
+  .vista-user-avatar { width: 72px; height: 72px; font-size: 36px; }
+  .vista-logon-name { font-size: 24px; }
+  .vista-logon-sub { font-size: 12px; }
+  .vista-input-row { gap: 8px; }
+  .vista-submit-circle { width: 48px; height: 48px; }
+}
+
+@media (max-width: 430px) {
+  .ap-header { flex-direction: column; align-items: stretch; }
+  .ap-header-actions { width: 100%; margin-left: 0; justify-content: space-between; }
+  .ap-form-actions { flex-direction: column; }
+  .ap-form-actions .ap-btn { width: 100%; min-height: 46px; }
+  .ap-card-head { flex-direction: column; }
+  .ap-card-head .ap-btn { width: 100%; }
+  .ap-post-actions .ap-btn { padding: 10px; }
+  .vista-layout { padding: 0; }
+  .vista-window { border-radius: 0; border-left: 0; border-right: 0; }
+  .vista-body { padding: 22px 16px 26px; }
+}

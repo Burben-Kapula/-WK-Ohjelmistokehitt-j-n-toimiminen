@@ -17,7 +17,7 @@ export default function LandingPage() {
   useEffect(() => {
     api.get("/posts")
       .then((res) => Array.isArray(res.data) && setPosts(res.data))
-      .catch((err) => console.error("Failed to load gallery posts:", err));
+      .catch((err) => console.error("Galleriaveistosten lataaminen epäonnistui:", err));
   }, []);
 
   const scrollTo = (ref) => ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -59,6 +59,7 @@ export default function LandingPage() {
     <div className="page">
       {/* Шапка в стиле Editorial */}
       <header className="header">
+        <span className="header-flag" role="img" aria-label="Suomen lippu">🇫🇮</span>
         <div className="header-brand" onClick={scrollToTop}>
           <img src={logoImg} alt="k.Betoniveistokset" className="logo" />
         </div>
@@ -76,7 +77,7 @@ export default function LandingPage() {
         <section className="hero">
           <div className="hero-top-info">
             <span>KÄSINVALMISTETUT BETONIVEISTOKSET</span>
-            <span>SUOMI · 2026</span>
+            <span>SUOMEN VALMISTE · 2026</span>
           </div>
           <h1 className="hero-title">VEISTOKSIA KOTIIN JA PIHAAN.</h1>
           <p className="hero-desc">
@@ -104,15 +105,15 @@ export default function LandingPage() {
                       {post.imageUrl ? (
                         <img src={post.imageUrl} alt={post.title || "Veistos"} className="editorial-card-img" />
                       ) : (
-                        <div className="editorial-card-placeholder">KUVA</div>
+                        <div className="editorial-card-placeholder">EI KUVAA</div>
                       )}
                       
                       <label htmlFor={uniqueId} className="film-arrow" onClick={(e) => e.stopPropagation()}>→</label>
                     </div>
 
                     <div className="filmstrip">
-                      <img src={post.imageUrl || "/photo1_2.jpg"} alt="Ракурс 2" />
-                      <img src={post.imageUrl || "/photo1_3.jpg"} alt="Ракурс 3" />
+                      <img src={post.imageUrl || "/photo1_2.jpg"} alt={`${post.title || "Veistos"} – näkymä 2`} />
+                      <img src={post.imageUrl || "/photo1_3.jpg"} alt={`${post.title || "Veistos"} – näkymä 3`} />
                     </div>
 
                     <div className="editorial-card-footer" onClick={openOrderForm}>
@@ -152,24 +153,24 @@ export default function LandingPage() {
             <div className="order-box">
               <div className="order-box-left">
                 <h2>Tilauslomake</h2>
-                <p>Kerro millaisen veistoksen haluaisit. Otamme yhteyttä 2 arkipäivän kuluessa.</p>
+                <p>Kerro millaisen veistoksen toivot. Otamme yhteyttä kahden arkipäivän kuluessa.</p>
               </div>
               {!isSubmitted ? (
                 <form className="order-box-form" onSubmit={handleOrderSubmit}>
                   <div className="form-row">
-                    <input name="firstName" type="text" placeholder="Etunimi *" required />
-                    <input name="lastName" type="text" placeholder="Sukunimi *" required />
+                    <input name="firstName" type="text" placeholder="Etunimi *" autoComplete="given-name" required />
+                    <input name="lastName" type="text" placeholder="Sukunimi *" autoComplete="family-name" required />
                   </div>
-                  <input name="email" type="email" placeholder="Sähköposti *" required />
-                  <input name="phone" type="tel" placeholder="Puhelinnumero *" required />
+                  <input name="email" type="email" placeholder="Sähköposti *" autoComplete="email" required />
+                  <input name="phone" type="tel" inputMode="tel" placeholder="Puhelinnumero *" autoComplete="tel" required />
                   <textarea name="description" rows="5" placeholder="Kerro toiveistasi (koko, eläin, tyyli, väri)..." required />
-                  {submitError && <div className="error-msg">{submitError}</div>}
+                  {submitError && <div className="error-msg" role="alert">{submitError}</div>}
                   <button type="submit" className="editorial-submit" disabled={submitting}>
                     {submitting ? "Lähetetään..." : "Lähetä tilauspyyntö →"}
                   </button>
                 </form>
               ) : (
-                <div className="order-success-msg">
+                <div className="order-success-msg" role="status" aria-live="polite">
                   <h3>Kiitos tilauksestasi!</h3>
                   <p>Otamme sinuun pian yhteyttä.</p>
                 </div>

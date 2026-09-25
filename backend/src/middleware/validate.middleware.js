@@ -18,7 +18,7 @@ export const validate = (schema) => (req, res, next) => {
       fs.promises.unlink(req.file.path).catch(() => {});
     }
     const messages = result.error.flatten().fieldErrors;
-    return res.status(400).json({ error: "Validation failed", details: messages });
+    return res.status(400).json({ error: "Tarkistus epäonnistui", details: messages });
   }
   // Перезаписуємо лише ті частини, що є в схемі (щоб не загубити req.params, якщо схема його не описує)
   if (result.data.body) req.body = result.data.body;

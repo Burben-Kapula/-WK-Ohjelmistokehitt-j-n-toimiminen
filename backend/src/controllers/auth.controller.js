@@ -21,7 +21,7 @@ export const login = async (req, res) => {
     console.error(
       "❗ Admin auth is not configured. Set ADMIN_EMAIL, ADMIN_PASSWORD_HASH and JWT_SECRET in backend/.env"
     );
-    return res.status(500).json({ error: "Server auth is not configured" });
+    return res.status(500).json({ error: "Palvelimen kirjautumisasetukset puuttuvat" });
   }
 
   // ADMIN_PASSWORD_HASH має бути bcrypt-хешем, а не паролем у відкритому вигляді
@@ -29,17 +29,17 @@ export const login = async (req, res) => {
     console.error(
       "❗ ADMIN_PASSWORD_HASH is not a valid bcrypt hash. Generate one with bcrypt — never put the plaintext password here."
     );
-    return res.status(500).json({ error: "Server auth is not configured" });
+    return res.status(500).json({ error: "Palvelimen kirjautumisasetukset puuttuvat" });
   }
 
   // Якщо email не збігається — повертаємо однакову помилку, щоб не підказувати, що саме невірне
   if (email?.trim().toLowerCase() !== adminEmail.trim().toLowerCase()) {
-    return res.status(401).json({ error: "Invalid credentials" });
+    return res.status(401).json({ error: "Virheelliset tunnukset" });
   }
   // Порівнюємо введений пароль із збереженим хешем
   const ok = await bcrypt.compare(password, adminHash);
   if (!ok) {
-    return res.status(401).json({ error: "Invalid credentials" });
+    return res.status(401).json({ error: "Virheelliset tunnukset" });
   }
 
   // Створюємо підписаний токен, який діє заданий час (JWT_EXPIRES_IN)

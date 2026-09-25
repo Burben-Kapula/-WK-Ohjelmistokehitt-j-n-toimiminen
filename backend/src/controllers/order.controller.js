@@ -24,7 +24,7 @@ export const createOrder = async (req, res, next) => {
   }
 
   console.log("📦 New order received:", { name, email, phone, orderTextLength: orderText.length });
-  res.status(201).json({ message: "Order received successfully" });
+  res.status(201).json({ message: "Tilaus vastaanotettu onnistuneesti" });
 };
 
 /**
@@ -50,7 +50,7 @@ export const createOrderRequest = async (req, res, next) => {
         Sukunimi: lastName,
         Sähköposti: email,
         Puhelin: phone,
-        "Millaisen veistoksen haluaisit": description,
+        "Millaisen veistoksen toivot": description,
         "Liitetiedostoja": attachments.length,
       },
       attachments,
@@ -60,5 +60,5 @@ export const createOrderRequest = async (req, res, next) => {
   }
 
   console.log("📦 New order request received:", { firstName, lastName, email, phone, files: attachments.length });
-  res.status(201).json({ message: "Order request received successfully" });
+  res.status(201).json({ message: "Tilauspyyntö vastaanotettu onnistuneesti" });
 };

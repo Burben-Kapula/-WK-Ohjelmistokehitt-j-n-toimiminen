@@ -4,8 +4,8 @@ import api from '../api'
 import '../styles/admin.css'
 
 /**
- * Windows Vista Aero styled Admin Logon Screen.
- * Accessible only through the special admin secret link.
+ * Ylläpidon kirjautumisnäkymä.
+ * Saavutettavissa vain salaisen ylläpitos linkin kautta.
  */
 export default function AdminLogin() {
   const navigate = useNavigate()
@@ -24,7 +24,7 @@ export default function AdminLogin() {
       localStorage.setItem('token', res.data.token)
       navigate('/admin')
     } catch (e) {
-      setErr(e.response?.data?.error || 'Login failed. Please check your credentials.')
+      setErr(e.response?.data?.error || 'Kirjautuminen epäonnistui. Tarkista tunnukset.')
     } finally {
       setLoading(false)
     }
@@ -32,34 +32,28 @@ export default function AdminLogin() {
 
   return (
     <div className="vista-layout">
-      {/* Aero Glass Window */}
       <div className="vista-window vista-window-small">
-        {/* Titlebar */}
         <div className="vista-titlebar">
           <div className="vista-title-left">
-            <span style={{ fontSize: '15px' }}>🛡️</span>
-            <span className="vista-title-text">Windows Security - Administrator Logon</span>
+            <span aria-hidden="true">🛡️</span>
+            <span className="vista-title-text">Ylläpito – kirjautuminen</span>
           </div>
           <div className="vista-controls">
-            <button className="vista-btn-control" type="button">_</button>
-            <button className="vista-btn-control" type="button">□</button>
-            <button className="vista-btn-control vista-btn-close" type="button" onClick={() => navigate('/')}>✕</button>
+            <button className="vista-btn-control" type="button" aria-label="Pienennä">_</button>
+            <button className="vista-btn-control" type="button" aria-label="Suurenna">□</button>
+            <button className="vista-btn-control vista-btn-close" type="button" onClick={() => navigate('/')} aria-label="Sulje">✕</button>
           </div>
         </div>
 
-        {/* Window Body */}
         <div className="vista-body">
           <div className="vista-logon-card">
-            {/* Glossy Circular Avatar */}
-            <div className="vista-user-avatar">
-              👤
-            </div>
+            <div className="vista-user-avatar" aria-hidden="true">👤</div>
 
-            <h1 className="vista-logon-name">Administrator</h1>
-            <div className="vista-logon-sub">K.BETONIVEISTOKSET · Control Panel</div>
+            <h1 className="vista-logon-name">Ylläpitäjä</h1>
+            <div className="vista-logon-sub">K.BETONIVEISTOKSET · Ohjauskeskus</div>
 
             {err && (
-              <div className="vista-msg error" style={{ textAlign: 'left' }}>
+              <div className="vista-msg error" style={{ textAlign: 'left' }} role="alert">
                 <span>⚠️</span>
                 <span>{err}</span>
               </div>
@@ -68,24 +62,24 @@ export default function AdminLogin() {
             <form onSubmit={handleSubmit} autoComplete="off" className="vista-form">
               <div style={{ textAlign: 'left' }}>
                 <label className="vista-label" htmlFor="vista-email">
-                  Admin Email
+                  Ylläpidon sähköposti
                 </label>
                 <input
                   id="vista-email"
                   name="email"
                   type="email"
                   className="vista-input"
-                  placeholder="admin@example.com"
+                  placeholder="yllapito@esimerkki.fi"
                   value={form.email}
                   onChange={handleChange}
-                  autoComplete="off"
+                  autoComplete="username"
                   required
                 />
               </div>
 
               <div style={{ textAlign: 'left' }}>
                 <label className="vista-label" htmlFor="vista-password">
-                  Password
+                  Salasana
                 </label>
                 <div className="vista-input-row">
                   <input
@@ -96,14 +90,15 @@ export default function AdminLogin() {
                     placeholder="••••••••"
                     value={form.password}
                     onChange={handleChange}
-                    autoComplete="new-password"
+                    autoComplete="current-password"
                     required
                   />
                   <button
                     type="submit"
                     className="vista-submit-circle"
                     disabled={loading}
-                    title="Log In"
+                    title="Kirjaudu"
+                    aria-label="Kirjaudu"
                   >
                     {loading ? '…' : '➔'}
                   </button>
@@ -114,16 +109,16 @@ export default function AdminLogin() {
                 <button
                   type="submit"
                   className="vista-btn vista-btn-primary"
-                  style={{ width: '100%', height: '32px' }}
+                  style={{ width: '100%', height: '44px' }}
                   disabled={loading}
                 >
-                  {loading ? 'Logging on...' : 'Log On to System'}
+                  {loading ? 'Kirjaudutaan…' : 'Kirjaudu järjestelmään'}
                 </button>
               </div>
             </form>
 
             <div className="vista-logon-footer">
-              <span>Windows Vista™ Ultimate</span> · <span>Protected Access</span>
+              <span>Ylläpitäjätila</span> · <span>Suojattu yhteys</span>
             </div>
           </div>
         </div>

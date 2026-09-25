@@ -1,34 +1,32 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import api from '../api'
+import '../App.css'
 
 /**
- * Головна сторінка — показує всі публікації.
- * Завантажує список із бекенду (GET /api/posts) при відкритті сторінки.
+ * Yksinkertainen teoslista. Tätä sivua ei tällä hetkellä käytetä
+ * varsinaisessa sovelluksessa, mutta sen teksti on pidetty suomeksi.
  */
 export default function Home() {
-  const [posts, setPosts] = useState([]) // Список публікацій
-  const [err, setErr] = useState('') // Повідомлення про помилку завантаження
+  const [posts, setPosts] = useState([])
+  const [err, setErr] = useState('')
 
-  // Виконуємо запит лише один раз після монтування компонента
   useEffect(() => {
     api.get('/posts')
       .then(r => setPosts(r.data))
-      .catch(() => setErr('Failed to load posts'))
+      .catch(() => setErr('Teosten lataaminen epäonnistui.'))
   }, [])
 
   return (
     <div className="container">
-      {/* Навігація по сайту */}
       <nav className="nav">
-        <Link to="/order">Make Order</Link>
+        <Link to="/order">Tee tilaus</Link>
       </nav>
 
-      <h1>Publications</h1>
+      <h1>Teokset</h1>
 
       {err && <div className="msg error">{err}</div>}
 
-      {/* Список публікацій: заголовок, опис, зображення */}
       <ul>
         {posts.map(p => (
           <li key={p.id} className="post">
